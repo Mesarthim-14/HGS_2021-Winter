@@ -130,10 +130,9 @@ void CModel::Draw()
     D3DXVECTOR3 pos = m_pModelInfo->GetPos();
     D3DXVECTOR3 rot = m_pModelInfo->GetRot();
 
-    //ワールドマトリックスの初期化
-    D3DXMatrixIdentity(&mtxWorld);
-
     CLibrary::ConfigMatrix(&mtxWorld, pos, rot);
+    pDevice->SetTransform(D3DTS_WORLD, &mtxWorld);
+
     m_pModelInfo->SetMtxWorld(mtxWorld);
 
     CModelInfo* pModelInfo = GetModelInfo();

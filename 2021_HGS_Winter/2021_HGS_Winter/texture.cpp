@@ -17,10 +17,10 @@
 //=============================================================================
 CTexture::CTexture()
 {
-    memset(m_apTexture, 0, sizeof(m_apTexture));
+  /*  memset(m_apTexture, 0, sizeof(m_apTexture));
     memset(m_pVolumeTexture, 0, sizeof(m_pVolumeTexture));
-    memset(m_pCubeTexture, 0, sizeof(m_pCubeTexture));
-    memset(m_aTexFileName, 0, sizeof(m_aTexFileName));
+    memset(m_pCubeTexture, 0, sizeof(m_pCubeTexture));*/
+    //memset(m_aTexFileName, 0, sizeof(m_aTexFileName));
 }
 
 //=============================================================================
@@ -62,7 +62,7 @@ HRESULT CTexture::SetTextureName()
     // 通常テクスチャ
     m_aTexFileName[TEXTURE_TYPE_NUM_NORMAL] =
     {
-        { "data/Texture/white.png" },                // テスト
+        { "data/Texture/stage_1.png" },                // テスト
     };
 
     // 分割テクスチャ

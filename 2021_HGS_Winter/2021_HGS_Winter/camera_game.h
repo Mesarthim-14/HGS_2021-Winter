@@ -28,6 +28,7 @@ public:
     ~CCameraGame();                         // デストラクタ
     
     HRESULT Init();                         // 初期化処理
+    void Uninit();
     void Update();                          // 更新処理
     static CCameraGame*Create();            // クリエイト
     void ChangeState(CState* pState);       // 状態の変更

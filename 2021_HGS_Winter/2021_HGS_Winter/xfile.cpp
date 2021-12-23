@@ -18,8 +18,8 @@
 //=============================================================================
 CXfile::CXfile()
 {
-    memset(m_aXfile, 0, sizeof(m_aXfile));
-    memset(m_pFileName, 0, sizeof(m_pFileName));
+    //memset(m_aXfile, 0, sizeof(m_aXfile));
+   // memset(m_pFileName, 0, sizeof(m_pFileName));
     memset(m_nMaxParts, 0, sizeof(m_nMaxParts));
 
     // 階層構造モデル初期化
@@ -39,6 +39,7 @@ CXfile::CXfile()
     m_aXfileName =
     {
         { "data/Model/Normal/block.x" },    // テストブロック
+        { "data/Model/Normal/dummy.x" },    // 木人
     };
     
     // 階層構造モデル

@@ -44,17 +44,17 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib,"winmm.lib")
 #pragma comment(lib,"dinput8.lib")    //入力処理に必要
-#pragma comment (lib,"ws2_32.lib")
+#pragma comment(lib,"ws2_32.lib")
 
-// メモリリーク
-//#ifdef _DEBUG
-//#define   new                   new(_NORMAL_BLOCK, __FILE__, __LINE__)
-//#define   malloc(s)             _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
-//#define   calloc(c, s)          _calloc_dbg(c, s, _NORMAL_BLOCK, __FILE__, __LINE__)
-//#define   realloc(p, s)         _realloc_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
-//#define   _recalloc(p, c, s)    _recalloc_dbg(p, c, s, _NORMAL_BLOCK, __FILE__, __LINE__)
-//#define   _expand(p, s)         _expand_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
-//#endif
+// メモリリーク見つける君
+#ifdef _DEBUG
+#define   new                   new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define   malloc(s)             _malloc_dbg(s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#define   calloc(c, s)          _calloc_dbg(c, s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#define   realloc(p, s)         _realloc_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#define   _recalloc(p, c, s)    _recalloc_dbg(p, c, s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#define   _expand(p, s)         _expand_dbg(p, s, _NORMAL_BLOCK, __FILE__, __LINE__)
+#endif
 
 //=============================================================================
 // マクロ定義

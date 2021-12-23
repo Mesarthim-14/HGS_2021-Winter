@@ -77,8 +77,8 @@ void CCameraStateNormal::Update()
         return;
     }
 
-        // キーボード更新
-        KeyBoardMove(pCamera);
+    // キーボード更新
+    KeyBoardMove(pCamera);
 }
 
 //=====================================================================

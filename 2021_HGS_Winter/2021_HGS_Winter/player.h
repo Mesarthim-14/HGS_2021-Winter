@@ -16,9 +16,8 @@
 //=========================================================================
 // 前方宣言
 //=========================================================================
-class CCollisionModelOBB;
-class CCollisionModelCapsule;
 class CState;
+class CDummyModel;
 
 //=============================================================================
 // プレイヤークラス
@@ -80,5 +79,6 @@ private:
     ACTION_STATE m_ActionState; // 行動状態
     CState* m_pCurrentState;    // 現在の状態ポインタ
     CState* m_pNextState;       // 次の状態ポインタ
+    CDummyModel* m_pModel;
 };
 #endif

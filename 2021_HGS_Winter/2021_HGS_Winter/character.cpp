@@ -97,7 +97,7 @@ void CCharacter::Uninit()
 void CCharacter::Update()
 {
     // d—Í
-    Gravity();
+    //Gravity();
 
     // ˆÚ“®—Ê‰ÁZ
     m_pos += m_move;

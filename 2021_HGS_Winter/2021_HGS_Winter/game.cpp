@@ -23,6 +23,8 @@
 #include "library.h"
 #include "camera_game.h"
 #include "state_player_normal.h"
+#include "meshfield.h"
+#include "ground.h"
 
 //=======================================================================================
 // コンストラクタ
@@ -47,6 +49,12 @@ CGame::~CGame()
 HRESULT CGame::Init()
 {
     CTestModel::Create();
+
+    // プレイヤーの生成
+    CreatePlayer();
+
+    CGround::Create();
+
     return S_OK;
 }
 
@@ -98,7 +106,7 @@ void CGame::CreatePlayer()
     // プレイヤーの生成
     if (!m_pPlayer)
     {
-        m_pPlayer = CPlayer::Create(D3DXVECTOR3(54500.0f, 1000.0f, 25500.0f), ZeroVector3);
-        m_pPlayer->ChangeState(CPlayerStateNormal::Create());
+        m_pPlayer = CPlayer::Create(ZeroVector3, ZeroVector3);
+    //    m_pPlayer->ChangeState(CPlayerStateNormal::Create());
     }
 }

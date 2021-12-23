@@ -192,6 +192,12 @@
     <ClCompile Include="state_player.cpp">
       <Filter>10_State\StatePlayer</Filter>
     </ClCompile>
+    <ClCompile Include="dummy_model.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ground.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h">
@@ -325,6 +331,12 @@
     </ClInclude>
     <ClInclude Include="state_player.h">
       <Filter>10_State\StatePlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="dummy_model.h">
+      <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ground.h">
+      <Filter>08_Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
-//=============================================================================
+//=============================================================================CGround
 //
-// テストモデルクラス [test_model.cpp]
+// 地面クラス [ground.cpp]
 // Author : Konishi Yuuto
 //
 //=============================================================================
@@ -8,48 +8,48 @@
 //=============================================================================
 // インクルード
 //=============================================================================
-#include "test_model.h"
+#include "ground.h"
 #include "manager.h"
 #include "renderer.h"
+#include "game.h"
+#include "texture.h"
 #include "resource_manager.h"
-#include "xfile.h"
-#include "model_info.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define TEST_POS        (ZeroVector3)
-#define TEST_ROT        (ZeroVector3)
+#define SIZE (D3DXVECTOR3(1000.0f, 0.0f, 1000.0f))
+#define GROUND_VERTEX_NUM (INT_VERTEX_2D{5, 5})
 
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CTestModel::CTestModel(PRIORITY Priority) : CModel(Priority)
+CGround::CGround(PRIORITY Priority) : CMeshField(Priority)
 {
 }
 
 //=============================================================================
 // デストラクタ
 //=============================================================================
-CTestModel::~CTestModel()
+CGround::~CGround()
 {
 }
 
 //=============================================================================
 // インスタンス生成
 //=============================================================================
-CTestModel * CTestModel::Create()
+CGround * CGround::Create()
 {
     // メモリ確保
-    CTestModel *pTestModel = new CTestModel(PRIORITY_MODEL);
+    CGround *pPolygon = new CGround(PRIORITY_UI);
 
     // !nullcheck
-    if (pTestModel)
+    if (pPolygon)
     {
         // 初期化処理
-        pTestModel->Init();
+        pPolygon->Init();
 
-        return pTestModel;
+        return pPolygon;
     }
 
     return nullptr;
@@ -58,14 +58,13 @@ CTestModel * CTestModel::Create()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CTestModel::Init()
+HRESULT CGround::Init()
 {
     // 初期化処理
-    CModel::Init();
-
-    CXfile *pXfile = GET_XFILE_PTR;
-    CXfile::MODEL model = pXfile->GetXfile(CXfile::XFILE_NUM_TEST_BLOCK);
-    GetModelInfo()->SetModelStatus(TEST_POS, TEST_ROT, model);
+    SetInfo(SIZE, GROUND_VERTEX_NUM);
+    CMeshField::Init();
+    CTexture *pTexture = GET_TEXTURE_PTR;
+    BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_TEST));
 
     return S_OK;
 }
@@ -73,23 +72,23 @@ HRESULT CTestModel::Init()
 //=============================================================================
 // 終了処理
 //=============================================================================
-void CTestModel::Uninit()
+void CGround::Uninit()
 {
-    CModel::Uninit();
+    CMeshField::Uninit();
 }
 
 //=============================================================================
 // 更新処理
 //=============================================================================
-void CTestModel::Update()
+void CGround::Update()
 {
-    CModel::Update();
+    CMeshField::Update();
 }
 
 //=============================================================================
 // 描画処理
 //=============================================================================
-void CTestModel::Draw()
+void CGround::Draw()
 {
-    CModel::Draw();
+    CMeshField::Draw();
 }

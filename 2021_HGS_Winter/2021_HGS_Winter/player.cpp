@@ -23,6 +23,7 @@
 #include "model.h"
 #include "state_player.h"
 #include "state_player_normal.h"
+#include "dummy_model.h"
 
 //=============================================================================
 // マクロ定義
@@ -30,28 +31,6 @@
 //=============================================================================
 #define PLAYER_SPEED			(10.0f)     // プレイヤーの移動量
 #define PLAYER_ROT_SPEED		(0.1f)      // キャラクターの回転する速度
-
-//=============================================================================
-// 生成処理関数
-// Author : Konishi Yuuto
-//=============================================================================
-CPlayer * CPlayer::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
-{
-	// メモリ確保
-	CPlayer *pPlayer = new CPlayer;
-
-	// nullcheck
-	if (pPlayer)
-	{
-		// 初期化処理
-		pPlayer->SetCharacterInfo(pos, rot);
-		pPlayer->Init();
-		return pPlayer;
-	}
-
-	// CPlayerを返す
-	return nullptr;
-}
 
 //=============================================================================
 // コンストラクタ
@@ -62,7 +41,7 @@ CPlayer::CPlayer(PRIORITY Priority) : CCharacter(Priority)
 	m_rotDest = ZeroVector3;
 	m_bMove = false;
 	m_Inertia = ZeroVector3;
-	m_fInertiaNum = 0.0f;
+	m_fInertiaNum = 0.3f;
 	m_fRotationSpeed = 0.1f;
 	m_fAngleSpeed = 0.0f;
 	m_nHP = 60;
@@ -70,6 +49,7 @@ CPlayer::CPlayer(PRIORITY Priority) : CCharacter(Priority)
 	m_ActionState = ACTION_NONE;
 	m_pCurrentState = nullptr;
 	m_pNextState = nullptr;
+    m_pModel = nullptr;
 }
 
 //=============================================================================
@@ -78,6 +58,28 @@ CPlayer::CPlayer(PRIORITY Priority) : CCharacter(Priority)
 //=============================================================================
 CPlayer::~CPlayer()
 {
+}
+
+//=============================================================================
+// 生成処理関数
+// Author : Konishi Yuuto
+//=============================================================================
+CPlayer * CPlayer::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
+{
+    // メモリ確保
+    CPlayer *pPlayer = new CPlayer;
+
+    // nullcheck
+    if (pPlayer)
+    {
+        // 初期化処理
+        pPlayer->SetCharacterInfo(pos, rot);
+        pPlayer->Init();
+        return pPlayer;
+    }
+
+    // CPlayerを返す
+    return nullptr;
 }
 
 //=============================================================================
@@ -100,6 +102,11 @@ HRESULT CPlayer::Init()
 		m_pCurrentState = CPlayerStateNormal::Create();
 	}
 
+    if (!m_pModel)
+    {
+        m_pModel = CDummyModel::Create();
+    }
+    SetSpeed(5.0f);
 	return S_OK;
 }
 
@@ -109,12 +116,13 @@ HRESULT CPlayer::Init()
 //=============================================================================
 void CPlayer::Uninit()
 {
-#ifdef _DEBUG
-	//情報保存
+    if (m_pCurrentState)
+    {
+        delete m_pCurrentState;
+        m_pCurrentState = nullptr;
+    }
 
-//	SaveInfo();
-#endif // !_DEBUG
-	CCharacter::Uninit();
+    CCharacter::Uninit();
 }
 
 //=============================================================================
@@ -123,13 +131,8 @@ void CPlayer::Uninit()
 //=============================================================================
 void CPlayer::Update()
 {
-	{
-		// 位置取得
-		D3DXVECTOR3 pos = GetPos();
-
-		// 古い位置設定
-		SetPosOld(pos);
-	}
+    // 古い位置設定
+    SetPosOld(GetPos());
 
 	// 状態更新
 	UpdateState();
@@ -138,6 +141,10 @@ void CPlayer::Update()
 
 	// 更新処理
 	UpdateRot();
+
+    // モデルに情報を送るよん
+    m_pModel->SetPos(GetPos());
+    m_pModel->SetRot(GetRot());
 }
 
 //=============================================================================

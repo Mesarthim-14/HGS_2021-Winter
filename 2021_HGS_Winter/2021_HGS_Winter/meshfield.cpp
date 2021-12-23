@@ -40,7 +40,7 @@ CMeshField * CMeshField::Create()
     if (pMeshField)
     {
         // ‰Šú‰»ˆ—
-        pMeshField->SetSceneInfo(ZeroVector3, ZeroVector3);
+        pMeshField->SetSceneInfo(ZeroVector3, D3DXVECTOR3(100.0f, 0.0f, 100.0f));
         pMeshField->Init();
 
         return pMeshField;

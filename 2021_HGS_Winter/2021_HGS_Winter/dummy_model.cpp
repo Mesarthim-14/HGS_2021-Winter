@@ -8,7 +8,7 @@
 //=============================================================================
 // インクルード
 //=============================================================================
-#include "test_model.h"
+#include "dummy_model.h"
 #include "manager.h"
 #include "renderer.h"
 #include "resource_manager.h"
@@ -24,24 +24,24 @@
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CTestModel::CTestModel(PRIORITY Priority) : CModel(Priority)
+CDummyModel::CDummyModel(PRIORITY Priority) : CModel(Priority)
 {
 }
 
 //=============================================================================
 // デストラクタ
 //=============================================================================
-CTestModel::~CTestModel()
+CDummyModel::~CDummyModel()
 {
 }
 
 //=============================================================================
 // インスタンス生成
 //=============================================================================
-CTestModel * CTestModel::Create()
+CDummyModel * CDummyModel::Create()
 {
     // メモリ確保
-    CTestModel *pTestModel = new CTestModel(PRIORITY_MODEL);
+    CDummyModel *pTestModel = new CDummyModel(PRIORITY_MODEL);
 
     // !nullcheck
     if (pTestModel)
@@ -58,13 +58,13 @@ CTestModel * CTestModel::Create()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CTestModel::Init()
+HRESULT CDummyModel::Init()
 {
     // 初期化処理
     CModel::Init();
 
     CXfile *pXfile = GET_XFILE_PTR;
-    CXfile::MODEL model = pXfile->GetXfile(CXfile::XFILE_NUM_TEST_BLOCK);
+    CXfile::MODEL model = pXfile->GetXfile(CXfile::XFILE_NUM_TEST_DUMMY);
     GetModelInfo()->SetModelStatus(TEST_POS, TEST_ROT, model);
 
     return S_OK;
@@ -73,7 +73,7 @@ HRESULT CTestModel::Init()
 //=============================================================================
 // 終了処理
 //=============================================================================
-void CTestModel::Uninit()
+void CDummyModel::Uninit()
 {
     CModel::Uninit();
 }
@@ -81,7 +81,7 @@ void CTestModel::Uninit()
 //=============================================================================
 // 更新処理
 //=============================================================================
-void CTestModel::Update()
+void CDummyModel::Update()
 {
     CModel::Update();
 }
@@ -89,7 +89,7 @@ void CTestModel::Update()
 //=============================================================================
 // 描画処理
 //=============================================================================
-void CTestModel::Draw()
+void CDummyModel::Draw()
 {
     CModel::Draw();
 }

@@ -25,8 +25,8 @@ public:
     {
         PRIORITY_0 = 0,
         PRIORITY_1,
-        PRIORITY_MODEL,         // モデル
         PRIORITY_CHARACTER,     // キャラクター
+        PRIORITY_MODEL,         // モデル
         PRIORITY_COLLISION,     //当たり判定
         PRIORITY_EFFECT,        // エフェクト
         PRIORITY_UI,            // UI

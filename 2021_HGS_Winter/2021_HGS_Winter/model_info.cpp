@@ -24,7 +24,7 @@ list<CModelInfo*> CModelInfo::m_ModelInfoList[MODEL_TYPE_MAX] = {};
 CModelInfo::CModelInfo(const MODEL_TYPE &type)
 {
     //各メンバ変数のクリア
-    memset(&m_model, 0, sizeof(m_model));
+   // memset(&m_model, 0, sizeof(m_model));
     m_pos = ZeroVector3;
     m_rot = ZeroVector3;
     ZeroMemory(m_OldMtxWorld, sizeof(m_OldMtxWorld));

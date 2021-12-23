@@ -197,6 +197,13 @@ void CManager::Uninit()
         m_pModeBase = nullptr;
     }
 
+    if (m_pCamera)
+    {
+        // カメラクラス
+        m_pCamera->Uninit();;
+        m_pCamera = nullptr;
+    }
+
     // シーン情報のリリース
     CScene::ReleaseAll();
 }

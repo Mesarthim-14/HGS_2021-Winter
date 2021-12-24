@@ -30,6 +30,8 @@
 #include "audience.h"
 #include "girle.h"
 #include "judge_flip.h"
+#include "gauge.h"
+#include "present_box.h"
 #include "texture.h"
 #include "scene2d.h"
 
@@ -40,6 +42,7 @@ CGame::CGame()
 {
     m_pPlayer = nullptr;
     m_pCpu = nullptr;
+    m_pAudience = nullptr;
 }
 
 //=======================================================================================
@@ -73,6 +76,9 @@ HRESULT CGame::Init()
 
     m_pFlip = CJudgeFlip::Create();
 
+    CGirle::Create();
+
+    CPresentBox::Create();
     return S_OK;
 }
 
@@ -92,6 +98,11 @@ void CGame::Uninit()
         m_pPlayer->Uninit();
         m_pPlayer = nullptr;
     }
+    if (m_pAudience)
+    {
+        m_pAudience->Uninit();
+        m_pAudience = nullptr;
+    }
 }
 
 //=======================================================================================
@@ -99,7 +110,7 @@ void CGame::Uninit()
 //=======================================================================================
 void CGame::Update()
 {
-
+    m_pAudience->SetStep(m_pPlayer->GetCombo());
 #ifdef _DEBUG
     CInputKeyboard* pKey = CManager::GetInstance()->GetKeyboard();
     CFade::FADE_MODE mode = CManager::GetInstance()->GetFade()->GetFade();

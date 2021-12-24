@@ -35,9 +35,10 @@ public:
     void Update();      // 更新処理
     void Draw();        // 描画処理
 
-    CPlayer* GetPlayer()const   { return m_pPlayer; }
-    CCpu* GetCpu()const         { return m_pCpu; }
-    CJudgeFlip* GetFlip()const  { return m_pFlip; }
+    CPlayer* GetPlayer()const       { return m_pPlayer; }
+    CCpu* GetCpu()const             { return m_pCpu; }
+    CJudgeFlip* GetFlip()const      { return m_pFlip; }
+    CAudience* GetAudience()const   { return m_pAudience; }
 private:
     // private関数
     void CreatePlayer();    // プレイヤーの生成関数

@@ -62,20 +62,21 @@ HRESULT CTexture::SetTextureName()
     // 通常テクスチャ
     m_aTexFileName[TEXTURE_TYPE_NUM_NORMAL] =
     {
-
         { "data/Texture/stage_1.png" },         // テスト
-        { "data/Texture/CPU_Rock.png" },        // グー
-        { "data/Texture/CPU_Scissors.png" },    // チョキ
-        { "data/Texture/CPU_Paper.png" },       // パー
-        { "data/Texture/Rock.png" },            // グー
-        { "data/Texture/Scissors.png" },        // チョキ
-        { "data/Texture/Paper.png" },           // パー
+        { "data/Texture/CPU_Rock2.png" },        // グー
+        { "data/Texture/CPU_Scissors2.png" },    // チョキ
+        { "data/Texture/CPU_Paper2.png" },       // パー
+        { "data/Texture/Rock2.png" },            // グー
+        { "data/Texture/Scissors2.png" },        // チョキ
+        { "data/Texture/Paper2.png" },           // パー
         { "data/Texture/number_1.png" },        // パー
         { "data/Texture/kankyaku.png" },        // 観客1
         { "data/Texture/kankyaku2.png" },       // 観客2
         { "data/Texture/win.png" },             // 勝ち
         { "data/Texture/draw.png" },            // 引き分け
         { "data/Texture/Lose.png" },            // 負け
+        { "data/Texture/Girl_Character.png" },  // 女の子
+        { "data/Texture/PresentBox.png" },      // プレゼントボックス
         { "data/Texture/Title.png" },           // タイトル
         { "data/Texture/stage_1.png" },         // チュートリアル
         { "data/Texture/game_bg.png" },         // ゲーム

@@ -30,7 +30,8 @@ public:
     void Draw();                            // 描画処理
     void ScaleUp(const float &fScaleUp);    // 拡大関数
 
-    void SetVertexPos();                                                                // 頂点の設定
+    void SetVertexPos();                            // 頂点の設定
+    void SetColor(const D3DXCOLOR &col) override;   // 色の設定
 protected:
     
     void InitAnimation(const int &nPatternNum, const int &nSpeed, const int &nLoop);    // アニメーション情報初期化
@@ -38,7 +39,6 @@ protected:
     void FlashPolygon(const float &fFlashFlame);                                          // ポリゴンの点滅
 
     // Set関数
-    void SetColor(const D3DXCOLOR &col) override;                               // 色の設定
     void SetRotation(const float& rotasion);                                    // 回転の設定
     void SetScale(const float &fScale);                                         // 拡大の値設定
     void SetSubFlashNum(const float &fSubNum) { m_fSubNum = fSubNum; }   // 点滅の値設定

@@ -156,6 +156,7 @@
     <ClCompile Include="dummy_model.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="gauge.cpp" />
     <ClCompile Include="girle.cpp" />
     <ClCompile Include="ground.cpp" />
     <ClCompile Include="input.cpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="plane.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="polygon.cpp" />
+    <ClCompile Include="present_box.cpp" />
     <ClCompile Include="ranking.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="resource_manager.cpp" />
@@ -217,6 +219,7 @@
     <ClInclude Include="dummy_model.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="gauge.h" />
     <ClInclude Include="girle.h" />
     <ClInclude Include="ground.h" />
     <ClInclude Include="input.h" />
@@ -239,6 +242,7 @@
     <ClInclude Include="plane.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="polygon.h" />
+    <ClInclude Include="present_box.h" />
     <ClInclude Include="ranking.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="resource_manager.h" />

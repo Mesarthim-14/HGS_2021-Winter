@@ -18,12 +18,13 @@
 #include "game.h"
 #include "player.h"
 #include "judge_flip.h"
+#include "gauge.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define POS         (D3DXVECTOR3(SCREEN_WIDTH/2 + 300.0f, SCREEN_HEIGHT/2, 0.0f))   // 座標
-#define SIZE        (D3DXVECTOR3(450.0f, 450.0f, 0.0f))                             // サイズ
+#define POS         (D3DXVECTOR3(SCREEN_WIDTH/2 + 500.0f, SCREEN_HEIGHT/2, 0.0f))   // 座標
+#define SIZE        (D3DXVECTOR3(700.0f, 500.0f, 0.0f))
 #define INTERVAL    (200)                                                           // 間隔
 
 //=============================================================================
@@ -149,7 +150,10 @@ void CCpu::SelectJudge()
         case CORRECT_TYPE_LOSE:
             pFlip->SetFlip((CJudgeFlip::JUDGE_FLIP_STATE)CORRECT_TYPE_LOSE);
             break;
+        default:
+            break;
         }
+        CGauge::Create(m_nInterval);
     }
     switch (nHand)
     {
@@ -182,21 +186,21 @@ void CCpu::SubInter(CPlayer* &pPlayer)
     switch (pPlayer->GetCombo())
     {
     case 5:
-        m_nInterval -= 10;
+        m_nInterval -= 20;
         break;
+
     case 10:
-        m_nInterval -= 15;
+        m_nInterval -= 20;
+    
         break;
+
     case 15:
-        m_nInterval -= 15;
-        break;
-    case 20:
-        m_nInterval -= 15;
+        m_nInterval -= 20;
         break;
     case 25:
         m_nInterval -= 15;
         break;
-    case 30:
+    case 35:
         m_nInterval -= 15;
         break;
     case 45:
@@ -205,10 +209,13 @@ void CCpu::SubInter(CPlayer* &pPlayer)
     case 60:
         m_nInterval -= 15;
         break;
-    case 75:
+    case 65:
         m_nInterval -= 15;
         break;
-    case 90:
+    case 80:
+        m_nInterval -= 15;
+        break;
+    case 100:
         m_nInterval -= 15;
         break;
 

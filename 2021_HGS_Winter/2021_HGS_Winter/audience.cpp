@@ -24,6 +24,7 @@
 #define BASE_POS D3DXVECTOR3(SCREEN_WIDTH / 2.0f, SCREEN_HEIGHT - 120.0f, 0.0f)
 #define UP_FRAME 100
 #define UP_RATE  0.05f
+#define STEP_MAX 20
 
 //**********************************
 // 静的メンバ変数定義
@@ -44,6 +45,8 @@ CAudience::CAudience(PRIORITY pri) : CScene2D(pri)
     ZeroMemory(&m_basePos, sizeof(m_basePos));
     m_bUp = false;
     m_nCntUp = 0;
+    m_bDraw = false;
+    m_nStep = 0;
 }
 
 //=============================
@@ -108,18 +111,21 @@ void CAudience::Uninit(void)
 //=============================
 void CAudience::Update(void)
 {
+    // ステップの上限処理
+    if (m_nStep > STEP_MAX) m_nStep = STEP_MAX;
+
     for (int nCntPats = 0; nCntPats < PARTS_MAX; nCntPats++)
     {
         if (m_bUp)
-        {
+        {// あげる
             m_basePos[nCntPats] += (m_aUpPos[nCntPats] - m_basePos[nCntPats]) * UP_RATE;
             m_nCntUp++;
             if (m_nCntUp >= UP_FRAME) m_bUp = false;
         }
         else
-        {
+        {// 通常
             m_nCntUp = 0;
-            m_basePos[nCntPats] += (BASE_POS - m_basePos[nCntPats]) * UP_RATE;
+            m_basePos[nCntPats] += (BASE_POS + ((m_aUpPos[nCntPats] - BASE_POS)*((float)m_nStep/20.0f) - m_basePos[nCntPats])) * UP_RATE;
         }
 
         m_aOffsetPos[nCntPats].y += m_afMoveY[nCntPats];
@@ -129,11 +135,21 @@ void CAudience::Update(void)
             m_afMoveY[nCntPats] *= -1;
         }
 
+        if (!m_bDraw)
+        {
+            m_apPolygon[nCntPats]->SetColor(BlackColor);
+        }
+        else
+        {
+            m_apPolygon[nCntPats]->SetColor(WhiteColor);
+        }
+
         m_apPolygon[nCntPats]->SetSceneInfo(m_basePos[nCntPats] + m_aOffsetPos[nCntPats], SIZE);
 
         m_apPolygon[nCntPats]->SetVertexPos();
     }
  
+
    // m_apPolygon[PARTS_FRONT]->SetSceneInfo()
 }
 

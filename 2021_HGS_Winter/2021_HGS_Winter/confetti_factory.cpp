@@ -82,7 +82,10 @@ void CConfettiFactory::Update(void)
 
         CConfetti::Create(D3DXVECTOR3(0.0f, SCREEN_HEIGHT, 0.0f), m_col, D3DXToRadian(-60));
         CConfetti::Create(D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), m_col, D3DXToRadian(-60 - 60));
-	}
+	
+        CConfetti::Create(D3DXVECTOR3(0.0f, SCREEN_HEIGHT, 0.0f), m_col, D3DXToRadian(-60));
+        CConfetti::Create(D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0.0f), m_col, D3DXToRadian(-60 - 60));
+    }
 
 	if (m_nLife >= 0)
 	{

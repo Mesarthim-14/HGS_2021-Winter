@@ -29,8 +29,9 @@ public:
     void Update();  // 更新処理
     void Draw();    // 描画処理
 
-protected:
     void SetVertexPos();                                                                // 頂点の設定
+protected:
+    
     void InitAnimation(const int &nPatternNum, const int &nSpeed, const int &nLoop);    // アニメーション情報初期化
     void InitScroll(const int &nSpeed, const float &fDivision);                         // 画像スクロールの設定
     void ScaleUp(const float &fScaleUp);                                                // 拡大関数

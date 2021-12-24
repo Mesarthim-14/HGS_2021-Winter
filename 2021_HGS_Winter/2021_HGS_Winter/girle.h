@@ -1,8 +1,8 @@
-#ifndef _CONFETTI_H_
-#define _CONFETTI_H_
+#ifndef _GIRLE_H_
+#define _GIRLE_H_
 //=============================================================================
 //
-// 紙吹雪クラス [confetti.h]
+// 女の子クラス [girle.h]
 // Author : Masuzawa Mirai
 //
 //=============================================================================
@@ -19,26 +19,21 @@
 //=========================================================================
 // クラス定義
 //=========================================================================
-class CConfetti : public CScene2D
+class CGirle : public CScene2D
 {
 public:
-    CConfetti(PRIORITY = PRIORITY_UI); // コンストラクタ
-    ~CConfetti();                     // デストラクタ
+  
 
-    static CConfetti *Create(D3DXVECTOR3 pos, D3DXCOLOR col, float fMoveAngle);   // インスタンス生成
-    HRESULT Init();             // 初期化処理
-    void Update();              // 更新処理
-    void Draw();                // 描画
+    CGirle(PRIORITY = PRIORITY_CHARACTER); // コンストラクタ
+    ~CGirle();                     // デストラクタ
+
+    static CGirle *Create();   // インスタンス生成
+    HRESULT Init();            // 初期化処理
+    void Uninit();             // 終了処理
+    void Update();             // 更新処理
+    void Draw();
 private:
 
-    //============
-    // メンバ変数
-    //============
-    int m_nLife;
-    float m_fMoveAngle;
-    float m_fMoveRate;
-    float m_fAngle;
-    D3DXVECTOR3 m_move;
 };
 
 #endif

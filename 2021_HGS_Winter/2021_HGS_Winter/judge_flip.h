@@ -1,8 +1,8 @@
-#ifndef _CONFETTI_H_
-#define _CONFETTI_H_
+#ifndef _JUDGE_FLIP_H_
+#define _JUDGE_FLIP_H_
 //=============================================================================
 //
-// 紙吹雪クラス [confetti.h]
+// ジャッジフリップクラス [judge_flip_2d.h]
 // Author : Masuzawa Mirai
 //
 //=============================================================================
@@ -19,26 +19,27 @@
 //=========================================================================
 // クラス定義
 //=========================================================================
-class CConfetti : public CScene2D
+class CJudgeFlip : public CScene2D
 {
 public:
-    CConfetti(PRIORITY = PRIORITY_UI); // コンストラクタ
-    ~CConfetti();                     // デストラクタ
+    enum JUDGE_FLIP_STATE
+    {
+        STATE_NONE = -1,
+        STATE_WIN,
+        STATE_LOSE,
+        STATE_MAX
+    };
+    CJudgeFlip(PRIORITY = PRIORITY_UI); // コンストラクタ
+    ~CJudgeFlip();                     // デストラクタ
 
-    static CConfetti *Create(D3DXVECTOR3 pos, D3DXCOLOR col, float fMoveAngle);   // インスタンス生成
+    static CJudgeFlip *Create();   // インスタンス生成
     HRESULT Init();             // 初期化処理
+    void Uninit();              // 初期化処理
     void Update();              // 更新処理
     void Draw();                // 描画
-private:
 
-    //============
-    // メンバ変数
-    //============
-    int m_nLife;
-    float m_fMoveAngle;
-    float m_fMoveRate;
-    float m_fAngle;
-    D3DXVECTOR3 m_move;
+    void SetFlip(JUDGE_FLIP_STATE state);
+private:
 };
 
 #endif

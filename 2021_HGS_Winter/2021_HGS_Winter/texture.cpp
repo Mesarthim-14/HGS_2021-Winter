@@ -63,6 +63,8 @@ HRESULT CTexture::SetTextureName()
     m_aTexFileName[TEXTURE_TYPE_NUM_NORMAL] =
     {
         { "data/Texture/stage_1.png" },                // テスト
+        { "data/Texture/kankyaku.png" },                // 観客1
+        { "data/Texture/kankyaku2.png" },               // 観客2
     };
 
     // 分割テクスチャ

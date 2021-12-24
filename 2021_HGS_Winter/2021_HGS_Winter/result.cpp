@@ -45,6 +45,12 @@ CResult::~CResult()
 //=============================================================================
 HRESULT CResult::Init()
 {
+    if (CManager::GetInstance()->CManager::GetResourceManager())
+    {
+        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
+        pSound->Stop(CSound::SOUND_SE_BYE);
+    }
+
     // タイトルテクスチャの生成
     CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
     pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_RESULT));

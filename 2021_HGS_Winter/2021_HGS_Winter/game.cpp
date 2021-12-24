@@ -59,6 +59,9 @@ CGame::~CGame()
 //=======================================================================================
 HRESULT CGame::Init()
 {
+    CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
+    pSound->Play(CSound::SOUND_BGM_GAME);
+
     // タイトルテクスチャの生成
     CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
     pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_GAME));
@@ -87,6 +90,12 @@ HRESULT CGame::Init()
 //=======================================================================================
 void CGame::Uninit()
 {
+    if (CManager::GetInstance()->CManager::GetResourceManager())
+    {
+        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
+        pSound->Stop(CSound::SOUND_BGM_GAME);
+    }
+
     if (m_pCpu)
     {
         m_pCpu->Uninit();

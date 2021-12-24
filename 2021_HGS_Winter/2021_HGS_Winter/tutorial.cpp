@@ -55,6 +55,12 @@ HRESULT CTutorial::Init()
 //=============================================================================
 void CTutorial::Uninit()
 {
+    if (CManager::GetInstance()->CManager::GetResourceManager())
+    {
+        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
+        pSound->Stop(CSound::SOUND_BGM_TITLE);
+    }
+
     for (auto &object : m_pObject2D)
     {
         // I—¹ˆ—

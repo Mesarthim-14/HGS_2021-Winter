@@ -32,6 +32,8 @@
 #include "camera_title.h"
 #include "camera_game.h"
 #include "library.h"
+#include "tutorial.h"
+#include "result.h"
 
 //=============================================================================
 //静的メンバ変数宣言
@@ -337,7 +339,12 @@ void CManager::SetMode(const MODE_TYPE &mode)
     case MODE_TYPE_TITLE:
         // タイトル生成
         m_pModeBase.reset(new CTitle);
-    //    m_pCamera.reset(CCameraTitle::Create());
+        break;
+
+        // チュートリアル
+    case MODE_TYPE_TUTORIAL:
+        // チュートリアル生成
+        m_pModeBase.reset(new CTutorial);
         break;
 
         // ゲーム
@@ -346,6 +353,12 @@ void CManager::SetMode(const MODE_TYPE &mode)
         m_pModeBase.reset(new CGame);
         m_pCamera.reset(CCameraGame::Create());
         m_pLight.reset(CLight::Create());
+        break;
+
+        // リザルト
+    case MODE_TYPE_RESULT:
+        // リザルト生成
+        m_pModeBase.reset(new CResult);
         break;
 
     default:

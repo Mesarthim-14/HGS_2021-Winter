@@ -1,14 +1,14 @@
 //=============================================================================
 //
-// タイトルクラス [title.cpp]
-// Author : Konishi Yuuto
+// リザルトクラス [result.cpp]
+// Author : Suzuki Mahiro
 //
 //=============================================================================
 
 //=============================================================================
 // インクルード
 //=============================================================================
-#include "title.h"
+#include "result.h"
 #include "manager.h"
 #include "renderer.h"
 #include "input.h"
@@ -23,7 +23,7 @@
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CTitle::CTitle()
+CResult::CResult()
 {
     m_pObject2D.clear();
 }
@@ -31,7 +31,7 @@ CTitle::CTitle()
 //=============================================================================
 // デストラクタ
 //=============================================================================
-CTitle::~CTitle()
+CResult::~CResult()
 {
     // 終了処理
     Uninit();
@@ -40,11 +40,11 @@ CTitle::~CTitle()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CTitle::Init()
+HRESULT CResult::Init()
 {
     // タイトルテクスチャの生成
     CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
-    pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_TITLE));
+    pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_RESULT));
     m_pObject2D.push_back(pScene2D);
 
     return S_OK;
@@ -53,7 +53,7 @@ HRESULT CTitle::Init()
 //=============================================================================
 // 終了処理
 //=============================================================================
-void CTitle::Uninit()
+void CResult::Uninit()
 {
     for (auto &object : m_pObject2D)
     {
@@ -68,7 +68,7 @@ void CTitle::Uninit()
 //=============================================================================
 // 更新処理
 //=============================================================================
-void CTitle::Update()
+void CResult::Update()
 {
 
     CInputKeyboard* pKey = CManager::GetInstance()->GetKeyboard();
@@ -79,14 +79,14 @@ void CTitle::Update()
         || pKey->GetTrigger(DIK_RETURN) && mode == CFade::FADE_MODE_NONE)
     {
         CFade *pFade = CManager::GetInstance()->GetFade();
-        pFade->SetFade(CManager::MODE_TYPE_TUTORIAL);
+        pFade->SetFade(CManager::MODE_TYPE_TITLE);
     }
 }
 
 //=============================================================================
 // 描画処理
 //=============================================================================
-void CTitle::Draw()
+void CResult::Draw()
 {
 
 }

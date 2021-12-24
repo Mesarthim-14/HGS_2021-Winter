@@ -1,6 +1,6 @@
-//=============================================================================
+//=============================================================================CPresentBox
 //
-// タイトルクラス [title.cpp]
+// テスト2Dクラス [test_2d.cpp]
 // Author : Konishi Yuuto
 //
 //=============================================================================
@@ -8,44 +8,66 @@
 //=============================================================================
 // インクルード
 //=============================================================================
-#include "title.h"
 #include "manager.h"
 #include "renderer.h"
-#include "input.h"
-#include "scene2d.h"
-#include "fade.h"
-#include "keyboard.h"
+#include "game.h"
+#include "present_box.h"
 #include "texture.h"
-#include "sound.h"
-#include "joypad.h"
 #include "resource_manager.h"
+
+//=============================================================================
+// マクロ定義
+//=============================================================================
+#define POS        (D3DXVECTOR3(SCREEN_WIDTH/2.0f+30.0f, SCREEN_HEIGHT/2.0f+250.0f, 0.0f))
+#define SIZE       (D3DXVECTOR3(320.0f, 320.0f, 0.0f))
+#define SCROLL_SPEED    (1.0f)
 
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CTitle::CTitle()
+CPresentBox::CPresentBox(PRIORITY Priority) : CScene2D(Priority)
 {
-    m_pObject2D.clear();
 }
 
 //=============================================================================
 // デストラクタ
 //=============================================================================
-CTitle::~CTitle()
+CPresentBox::~CPresentBox()
 {
-    // 終了処理
-    Uninit();
+}
+
+//=============================================================================
+// インスタンス生成
+//=============================================================================
+CPresentBox * CPresentBox::Create()
+{
+    // メモリ確保
+    CPresentBox *pPolygon = new CPresentBox(PRIORITY_CHARACTER);
+
+    // !nullcheck
+    if (pPolygon)
+    {
+        // 初期化処理
+        pPolygon->Init();
+
+        return pPolygon;
+    }
+
+    return nullptr;
 }
 
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CTitle::Init()
+HRESULT CPresentBox::Init()
 {
-    // タイトルテクスチャの生成
-    CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
-    pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_TITLE));
-    m_pObject2D.push_back(pScene2D);
+    // 初期化処理
+    SetSceneInfo(POS, SIZE);
+    CScene2D::Init();
+
+    CTexture *pTexture = GET_TEXTURE_PTR;
+    BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_PRESENT_BOX));
+
 
     return S_OK;
 }
@@ -53,40 +75,23 @@ HRESULT CTitle::Init()
 //=============================================================================
 // 終了処理
 //=============================================================================
-void CTitle::Uninit()
+void CPresentBox::Uninit()
 {
-    for (auto &object : m_pObject2D)
-    {
-        // 終了処理
-        object->Uninit();
-    }
-
-    // オブジェクト削除
-    m_pObject2D.clear();
+    CScene2D::Uninit();
 }
 
 //=============================================================================
 // 更新処理
 //=============================================================================
-void CTitle::Update()
+void CPresentBox::Update()
 {
-
-    CInputKeyboard* pKey = CManager::GetInstance()->GetKeyboard();
-    CFade::FADE_MODE mode = CManager::GetInstance()->GetFade()->GetFade();
-
-    // コントローラのstartを押したときか、エンターキーを押したとき
-    if (CManager::GetInstance()->GetJoypad()->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_START, 0) && mode == CFade::FADE_MODE_NONE
-        || pKey->GetTrigger(DIK_RETURN) && mode == CFade::FADE_MODE_NONE)
-    {
-        CFade *pFade = CManager::GetInstance()->GetFade();
-        pFade->SetFade(CManager::MODE_TYPE_TUTORIAL);
-    }
+    CScene2D::Update();
 }
 
 //=============================================================================
 // 描画処理
 //=============================================================================
-void CTitle::Draw()
+void CPresentBox::Draw()
 {
-
+    CScene2D::Draw();
 }

@@ -15,17 +15,17 @@
 //**********************************
 //マクロ定義
 //**********************************
-#define MIN_SIZE (10.0f)                // 最小サイズ
-#define RAND_SIZE_AMPLITUDE (20)       // 乱数のふり幅*サイズ
-#define ADJUST_RAND (100.0f)           // 乱数生成時調整値*小数点を出すため
-#define MIN_LIFE (30.0f)               // 最小ライフ
-#define RAND_LIFE_AMPLITUDE (20)       // 乱数のふり幅*寿命
-#define RAND_MOVE_ANGLE_AMPLITUDE (45) // 乱数のふり幅*紙吹雪を飛ばす角度
-#define MIN_SPEED (12.0f)               // 最小スピード
-#define RAND_SPEED_AMPLITUDE (10)      // 乱数のふり幅*スピード
-#define ADD_ANGLE (D3DXToRadian(1.0f))                 // 角度加算値
+#define MIN_SIZE (10.0f)                        // 最小サイズ
+#define RAND_SIZE_AMPLITUDE (20)                // 乱数のふり幅*サイズ
+#define ADJUST_RAND (100.0f)                    // 乱数生成時調整値*小数点を出すため
+#define MIN_LIFE (30)                           // 最小ライフ
+#define RAND_LIFE_AMPLITUDE (20)                // 乱数のふり幅*寿命
+#define RAND_MOVE_ANGLE_AMPLITUDE (45)          // 乱数のふり幅*紙吹雪を飛ばす角度
+#define MIN_SPEED (12.0f)                       // 最小スピード
+#define RAND_SPEED_AMPLITUDE (10)               // 乱数のふり幅*スピード
+#define ADD_ANGLE (D3DXToRadian(1.0f))          // 角度加算値
 #define MOVE_Y_DIST (5.0f)                      // 移動量Yの目標値
-#define MOVE_RATE (0.035f)                       // 移動量の係数
+#define MOVE_RATE (0.035f)                      // 移動量の係数
 #define SIZE_DIST D3DXVECTOR3(-2.0f,-2.0f,0.0f) // サイズの目標値
 #define SIZE_RATE (0.2f)                        // サイズの係数
 #define RAND_COLOR_AMPLITUDE (5)                // 乱数のふり幅*色

@@ -1,8 +1,8 @@
-#ifndef _JUDGE_FLIP_H_
-#define _JUDGE_FLIP_H_
+#ifndef _PRESENT_BOX_H_
+#define _PRESENT_BOX_H_
 //=============================================================================
 //
-// ジャッジフリップクラス [judge_flip_2d.h]
+// プレゼントボックスクラスクラス [present_box.h]
 // Author : Masuzawa Mirai
 //
 //=============================================================================
@@ -15,31 +15,21 @@
 //=========================================================================
 // 前方宣言
 //=========================================================================
-#define JUDGE_FLIP_STENCIL 5
+
 //=========================================================================
 // クラス定義
 //=========================================================================
-class CJudgeFlip : public CScene2D
+class CPresentBox : public CScene2D
 {
 public:
-    enum JUDGE_FLIP_STATE
-    {
-        STATE_NONE = -1,
-        STATE_WIN,
-        STATE_DRAW,
-        STATE_LOSE,
-        STATE_MAX
-    };
-    CJudgeFlip(PRIORITY = PRIORITY_UI); // コンストラクタ
-    ~CJudgeFlip();                     // デストラクタ
+    CPresentBox(PRIORITY = PRIORITY_CHARACTER); // コンストラクタ
+    ~CPresentBox();                     // デストラクタ
 
-    static CJudgeFlip *Create();   // インスタンス生成
+    static CPresentBox *Create();   // インスタンス生成
     HRESULT Init();             // 初期化処理
     void Uninit();              // 初期化処理
     void Update();              // 更新処理
     void Draw();                // 描画
-
-    void SetFlip(JUDGE_FLIP_STATE state);
 private:
 };
 

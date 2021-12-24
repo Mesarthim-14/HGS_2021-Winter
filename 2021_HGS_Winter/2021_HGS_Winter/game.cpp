@@ -30,6 +30,10 @@
 #include "audience.h"
 #include "girle.h"
 #include "judge_flip.h"
+#include "gauge.h"
+#include "present_box.h"
+#include "texture.h"
+#include "scene2d.h"
 
 //=======================================================================================
 // コンストラクタ
@@ -55,6 +59,10 @@ CGame::~CGame()
 //=======================================================================================
 HRESULT CGame::Init()
 {
+    // タイトルテクスチャの生成
+    CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
+    pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_GAME));
+    m_pObject2D.push_back(pScene2D);
 
     if (!m_pCpu)
     {
@@ -68,6 +76,9 @@ HRESULT CGame::Init()
 
     m_pFlip = CJudgeFlip::Create();
 
+    CGirle::Create();
+
+    CPresentBox::Create();
     return S_OK;
 }
 
@@ -99,7 +110,7 @@ void CGame::Uninit()
 //=======================================================================================
 void CGame::Update()
 {
-
+    m_pAudience->SetStep(m_pPlayer->GetCombo());
 #ifdef _DEBUG
     CInputKeyboard* pKey = CManager::GetInstance()->GetKeyboard();
     CFade::FADE_MODE mode = CManager::GetInstance()->GetFade()->GetFade();
@@ -109,6 +120,12 @@ void CGame::Update()
     {
         CFade *pFade = CManager::GetInstance()->GetFade();
         pFade->SetFade(CManager::MODE_TYPE_TITLE);
+    }
+
+    if (pKey->GetTrigger(DIK_RETURN) && mode == CFade::FADE_MODE_NONE)
+    {
+        CFade *pFade = CManager::GetInstance()->GetFade();
+        pFade->SetFade(CManager::MODE_TYPE_RESULT);
     }
 
     //  紙吹雪出す

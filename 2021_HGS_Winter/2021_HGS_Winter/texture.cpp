@@ -78,7 +78,7 @@ HRESULT CTexture::SetTextureName()
         { "data/Texture/Girl_Character.png" },  // 女の子
         { "data/Texture/PresentBox.png" },      // プレゼントボックス
         { "data/Texture/Title.png" },           // タイトル
-        { "data/Texture/stage_1.png" },         // チュートリアル
+        { "data/Texture/Tutorial.png" },         // チュートリアル
         { "data/Texture/game_bg.png" },         // ゲーム
         { "data/Texture/Paper.png" },           // リザルト
         { "data/Texture/end.png" },           // リザルト

@@ -42,6 +42,8 @@ CGame::CGame()
 {
     m_pPlayer = nullptr;
     m_pCpu = nullptr;
+
+    m_pGirle = nullptr;
 }
 
 //=======================================================================================
@@ -75,7 +77,7 @@ HRESULT CGame::Init()
 
     m_pFlip = CJudgeFlip::Create();
 
-    CGirle::Create();
+    m_pGirle = CGirle::Create();
 
     CPresentBox::Create();
     return S_OK;
@@ -91,11 +93,19 @@ void CGame::Uninit()
         m_pCpu->Uninit();
         m_pCpu = nullptr;
     }
+    
     // プレイヤーの終了処理
     if (m_pPlayer)
     {
         m_pPlayer->Uninit();
         m_pPlayer = nullptr;
+    }
+
+    // プレイヤーの終了処理
+    if (m_pGirle)
+    {
+        m_pGirle->Uninit();
+        m_pGirle = nullptr;
     }
 }
 

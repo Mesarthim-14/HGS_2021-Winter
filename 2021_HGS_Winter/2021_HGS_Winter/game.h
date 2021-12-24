@@ -49,5 +49,6 @@ private:
     CAudience* m_pAudience;  // 観客
     CJudgeFlip * m_pFlip;    // フリップ
     vector<CScene2D*> m_pObject2D;    // 2Dオブジェクト
+    int m_nEndCounter;
 };
 #endif

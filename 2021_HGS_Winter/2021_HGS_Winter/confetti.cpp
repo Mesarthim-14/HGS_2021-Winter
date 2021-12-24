@@ -116,30 +116,30 @@ HRESULT CConfetti::Init(void)
 //==================================
 void CConfetti::Update(void)
 {
-    // 座標に移動量を足す
-    SetPos(GetPos() + m_move);
-    // 移動量の変異;
-    m_move.y += (MOVE_Y_DIST - m_move.y)*m_fMoveRate;
-    
-    // 角度
-    if (m_move.x >= 0) m_fAngle += ADD_ANGLE;
-    else               m_fAngle -= ADD_ANGLE;
+        // 座標に移動量を足す
+        SetPos(GetPos() + m_move);
+        // 移動量の変異;
+        m_move.y += (MOVE_Y_DIST - m_move.y)*m_fMoveRate;
 
-    SetRotation(m_fAngle);
-    // 寿命処理
-    m_nLife--;
-    if (m_nLife < 0)
-    {
-        // サイズを小さくする
-        D3DXVECTOR3 size = GetSize();
-        size += (SIZE_DIST - size)*SIZE_RATE;
-        SetSize(size);
-        // 消す
-        if (size.x <= 0)
+        // 角度
+        if (m_move.x >= 0) m_fAngle += ADD_ANGLE;
+        else               m_fAngle -= ADD_ANGLE;
+
+        SetRotation(m_fAngle);
+        // 寿命処理
+        m_nLife--;
+        if (m_nLife < 0)
         {
-            Uninit();
+            // サイズを小さくする
+            D3DXVECTOR3 size = GetSize();
+            size += (SIZE_DIST - size)*SIZE_RATE;
+            SetSize(size);
+            // 消す
+            if (size.x <= 0)
+            {
+                Uninit();
+            }
         }
-    }
 }
 
 //==================================

@@ -23,9 +23,9 @@
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define POS         (D3DXVECTOR3(SCREEN_WIDTH/2 + 500.0f, SCREEN_HEIGHT/2, 0.0f))   // 座標
-#define SIZE        (D3DXVECTOR3(700.0f, 500.0f, 0.0f))
-#define INTERVAL    (200)                                                           // 間隔
+#define POS         (D3DXVECTOR3(SCREEN_WIDTH / 2 + 600.0f, SCREEN_HEIGHT / 2+50.0f, 0.0f))   // 座標
+#define SIZE        (D3DXVECTOR3(900.0f, 700.0f, 0.0f))
+#define INTERVAL    (180)                                                           // 間隔
 
 //=============================================================================
 // コンストラクタ
@@ -89,20 +89,23 @@ void CCpu::Uninit()
 //=============================================================================
 void CCpu::Update()
 {
-    if (m_nCounter >= m_nInterval - 15)
+    if (!CManager::GetInstance()->GetGame()->GetPlayer()->GetEnd())
     {
-        CScene2D* pScene = GetScene();
-        if (pScene)
+        if (m_nCounter >= m_nInterval - 15)
         {
-            // スケール
-            pScene->ScaleUp(-0.02f);
+            CScene2D* pScene = GetScene();
+            if (pScene)
+            {
+                // スケール
+                pScene->ScaleUp(-0.02f);
+            }
         }
-    }
 
-    // 判定
-    if (CLibrary::CounterLimit(m_nInterval, m_nCounter))
-    {
-        SelectJudge();
+        // 判定
+        if (CLibrary::CounterLimit(m_nInterval, m_nCounter))
+        {
+            SelectJudge();
+        }
     }
 }
 
@@ -126,7 +129,9 @@ void CCpu::SelectJudge()
         if (pPlayer)
         {
             // コンボ終了
-            pPlayer->EndCombo();
+            //pPlayer->EndCombo();
+            pPlayer->End();
+            return;
         }
     }
 
@@ -186,16 +191,15 @@ void CCpu::SubInter(CPlayer* &pPlayer)
     switch (pPlayer->GetCombo())
     {
     case 5:
-        m_nInterval -= 20;
+        m_nInterval -= 15;
         break;
 
     case 10:
-        m_nInterval -= 20;
-    
+        m_nInterval -= 15;
         break;
 
     case 15:
-        m_nInterval -= 20;
+        m_nInterval -= 15;
         break;
     case 25:
         m_nInterval -= 15;

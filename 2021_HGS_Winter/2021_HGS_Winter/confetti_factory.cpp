@@ -102,4 +102,5 @@ void CConfettiFactory::Update(void)
 //=============================
 void CConfettiFactory::Draw(void)
 {
+
 }

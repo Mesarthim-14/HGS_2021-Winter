@@ -43,6 +43,7 @@ CGame::CGame()
     m_pPlayer = nullptr;
     m_pCpu = nullptr;
     m_pAudience = nullptr;
+    m_nEndCounter = 0;
 }
 
 //=======================================================================================
@@ -110,10 +111,20 @@ void CGame::Uninit()
 //=======================================================================================
 void CGame::Update()
 {
+    CFade::FADE_MODE mode = CManager::GetInstance()->GetFade()->GetFade();
+
     m_pAudience->SetStep(m_pPlayer->GetCombo());
+    if (m_pPlayer->GetEnd())
+    {
+        if (CLibrary::CounterLimit(200, m_nEndCounter) && mode == CFade::FADE_MODE_NONE)
+        {
+            CFade *pFade = CManager::GetInstance()->GetFade();
+            pFade->SetFade(CManager::MODE_TYPE_RESULT);
+        }
+    }
+
 #ifdef _DEBUG
     CInputKeyboard* pKey = CManager::GetInstance()->GetKeyboard();
-    CFade::FADE_MODE mode = CManager::GetInstance()->GetFade()->GetFade();
 
     // ƒ^ƒCƒgƒ‹‚É–ß‚é
     if (pKey->GetTrigger(DIK_TAB) && mode == CFade::FADE_MODE_NONE)

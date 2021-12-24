@@ -297,7 +297,6 @@ void CRenderer::Draw()
 
 		//オブジェクトクラスの全描画処理呼び出し
         CScene::DrawAll3D();
-
         CScene::DrawAll2D();
 
         if (m_bShockBlur)

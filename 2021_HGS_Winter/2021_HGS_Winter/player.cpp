@@ -20,18 +20,19 @@
 #include "joypad.h"
 #include "audience.h"
 #include "confetti_factory.h"
+#include "end.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define TEX_POS     (D3DXVECTOR3(SCREEN_WIDTH / 2 - 500.0f, SCREEN_HEIGHT / 2, 0.0f))
-#define TEX_SIZE    (D3DXVECTOR3(700.0f, 500.0f, 0.0f))
+#define TEX_POS     (D3DXVECTOR3(SCREEN_WIDTH / 2 - 600.0f, SCREEN_HEIGHT / 2, 0.0f))
+#define TEX_SIZE    (D3DXVECTOR3(900.0f, 700.0f, 0.0f))
 
 #define COMBO_NUMBER_INTERVAL	(80.0f)														// コンボ数の間隔
 
 // コンボ数UIの情報
 #define COMBO_NUMBER_POS_X  (1100.0f)											// コンボ数の座標
-#define COMBO_NUMBER_POS_Y	(150.0f)											// コンボ数の座標
+#define COMBO_NUMBER_POS_Y	(125.0f)											// コンボ数の座標
 #define COMBO_NUMBER_POS	(D3DXVECTOR3(COMBO_NUMBER_POS_X, COMBO_NUMBER_POS_Y, 0.0f))
 
 #define COMBO_NUMBER_SIZE_X (105.0f)															// コンボ数の座標
@@ -48,6 +49,7 @@ CPlayer::CPlayer(PRIORITY Priority) : CJudge(Priority)
     m_nCombo = 0;
     m_apCombo.clear();
     m_bCombo = false;
+    m_pEnd = nullptr;
 }
 
 //=============================================================================
@@ -106,6 +108,12 @@ void CPlayer::Uninit()
             pCombo = nullptr;
         }
         m_apCombo.clear();
+    }
+
+    if (m_pEnd)
+    {
+        m_pEnd->Uninit();
+        m_pEnd = nullptr;
     }
 
     // 自身の終了処理
@@ -244,17 +252,15 @@ void CPlayer::Judge()
                 else
                 {
                     AddCombo();
-
                 }
 
                 CreateEffect();
-
-
             }
             else
             {
                 // 間違えコンボ終了
-                EndCombo();
+                //EndCombo();
+                End();
             }
         }
 
@@ -358,7 +364,6 @@ void CPlayer::CreateCombo()
             m_apCombo.push_back(pNumber2d);
         }
     }
-
 }
 
 //=============================================================================
@@ -404,5 +409,13 @@ void CPlayer::CreateEffect()
     {
         CConfettiFactory::Create(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f), 20);
         CConfettiFactory::Create(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 20);
+    }
+}
+
+void CPlayer::End()
+{
+    if (!m_pEnd)
+    {
+        m_pEnd = CEnd::Create();
     }
 }

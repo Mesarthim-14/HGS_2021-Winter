@@ -45,7 +45,7 @@ CGirle::~CGirle()
 CGirle * CGirle::Create(void)
 {
     // ƒƒ‚ƒŠ‚ÌŠm•Û
-    CGirle *pGirle = new CGirle;
+    CGirle *pGirle = new CGirle(PRIORITY_CHARACTER);
     // ‰Šú‰»
     pGirle->Init();
 

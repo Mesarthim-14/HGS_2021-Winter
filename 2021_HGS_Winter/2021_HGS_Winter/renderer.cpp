@@ -17,6 +17,7 @@
 #include "keyboard.h"
 #include "polygon.h"
 #include "library.h"
+#include "shock_blur.h"
 
 //=============================================================================
 // マクロ定義
@@ -30,6 +31,9 @@ CRenderer::CRenderer()
 {
 	m_pD3D = nullptr;			// Direct3Dオブジェクト
 	m_fillMode = D3DFILL_SOLID;
+    m_pShockBlur = nullptr;
+    m_bShockBlur = false;
+
 }
 
 //=============================================================================
@@ -155,6 +159,12 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 	m_pD3DDevice->SetMaterial(&material);
 	m_pD3DDevice->SetRenderState(D3DRS_AMBIENT, 0x44444444);
 
+    if (!m_pShockBlur)
+    {
+        m_pShockBlur = new CShockBlur(m_pD3DDevice, SCREEN_WIDTH, SCREEN_HEIGHT);
+        m_pShockBlur->Load();
+    }
+
 	return S_OK;
 }
 
@@ -163,6 +173,12 @@ HRESULT CRenderer::Init(HWND hWnd, bool bWindow)
 //=============================================================================
 void CRenderer::Uninit()
 {
+    if (m_pShockBlur)
+    {
+        m_pShockBlur->Uninit();
+        m_pShockBlur = nullptr;
+    }
+
 	// デバイスの破棄
 	if (m_pD3DDevice != nullptr)
 	{
@@ -273,10 +289,20 @@ void CRenderer::Draw()
 			}
 		}
 
+        if (m_bShockBlur)
+        {
+            m_pShockBlur->Begin();
+        }
+
 		//オブジェクトクラスの全描画処理呼び出し
         CScene::DrawAll3D();
 
         CScene::DrawAll2D();
+
+        if (m_bShockBlur)
+        {
+            m_pShockBlur->Draw();
+        }
 
 		CFade *pFade = CManager::GetInstance()->GetFade();
 		if (pFade)
@@ -309,4 +335,13 @@ void CRenderer::Draw()
 
 	// バックバッファとフロントバッファの入れ替え
 	m_pD3DDevice->Present(nullptr, nullptr, nullptr, nullptr);
+}
+
+//=============================================================================
+// ブラーの設定
+//=============================================================================
+void CRenderer::SetShockBlur(const bool & bFlag, const float & fPower)
+{
+    m_bShockBlur = bFlag;
+    m_pShockBlur->SetBlurPower(fPower);
 }

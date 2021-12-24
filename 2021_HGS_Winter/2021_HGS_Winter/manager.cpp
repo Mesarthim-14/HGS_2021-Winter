@@ -187,6 +187,7 @@ void CManager::Uninit()
     //ƒƒ‚ƒŠŠJ•ú
     if (m_pRenderer)
     {
+        m_pRenderer->Uninit();
         // •`‰æƒNƒ‰ƒX
         m_pRenderer.reset();
         m_pRenderer = nullptr;

@@ -16,6 +16,7 @@
 // 前方宣言
 //=========================================================================
 class CScene2D;
+class CPlayer;
 
 //=========================================================================
 // クラス定義
@@ -37,10 +38,13 @@ public:
     CORRECT_TYPE GetCorrect()const      { return m_Correct; }
 
 private:
-    void SelectJudge();
+    void SelectJudge(); // 手を選ぶ
+    void SubInter(CPlayer* &pPlayer);    // 間隔の減算
 
     CORRECT_TYPE m_Correct; // 正解の手
     int m_nCounter;         // かうんたー
+    int m_nInterval;        // インターバル
+    int m_nSubInter;        // インターバルの減算値
     bool m_bJudge;          // ジャッジ
 };
 

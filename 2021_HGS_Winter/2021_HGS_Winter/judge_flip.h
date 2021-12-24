@@ -26,6 +26,7 @@ public:
     {
         STATE_NONE = -1,
         STATE_WIN,
+        STATE_DRAW,
         STATE_LOSE,
         STATE_MAX
     };

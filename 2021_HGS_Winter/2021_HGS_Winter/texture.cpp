@@ -70,9 +70,13 @@ HRESULT CTexture::SetTextureName()
         { "data/Texture/Rock.png" },            // グー
         { "data/Texture/Scissors.png" },        // チョキ
         { "data/Texture/Paper.png" },           // パー
-        { "data/Texture/number_1.png" },           // パー
-        { "data/Texture/kankyaku.png" },                // 観客1
-        { "data/Texture/kankyaku2.png" },               // 観客2
+        { "data/Texture/number_1.png" },        // パー
+        { "data/Texture/kankyaku.png" },        // 観客1
+        { "data/Texture/kankyaku2.png" },       // 観客2
+        { "data/Texture/win.png" },             // 勝ち
+        { "data/Texture/draw.png" },            // 引き分け
+        { "data/Texture/Lose.png" },            // 負け
+
     };
 
     // 分割テクスチャ

@@ -17,18 +17,19 @@
 #include "texture.h"
 #include "cpu.h"
 #include "number_2d.h"
+#include "joypad.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define TEX_POS     (D3DXVECTOR3(SCREEN_WIDTH / 2 - 200.0f, SCREEN_HEIGHT / 2, 0.0f))
+#define TEX_POS     (D3DXVECTOR3(SCREEN_WIDTH / 2 - 300.0f, SCREEN_HEIGHT / 2, 0.0f))
 #define TEX_SIZE    (D3DXVECTOR3(450.0f, 450.0f, 0.0f))
 
 #define COMBO_NUMBER_INTERVAL	(80.0f)														// コンボ数の間隔
 
 // コンボ数UIの情報
 #define COMBO_NUMBER_POS_X  (1100.0f)											// コンボ数の座標
-#define COMBO_NUMBER_POS_Y	(150.0f)													// コンボ数の座標
+#define COMBO_NUMBER_POS_Y	(150.0f)											// コンボ数の座標
 #define COMBO_NUMBER_POS	(D3DXVECTOR3(COMBO_NUMBER_POS_X, COMBO_NUMBER_POS_Y, 0.0f))
 
 #define COMBO_NUMBER_SIZE_X (105.0f)															// コンボ数の座標
@@ -138,9 +139,10 @@ void CPlayer::SelectHand()
     {
         return;
     }
-
+    
+    CInputJoypad* pPad = CManager::GetInstance()->GetJoypad();
     // グー
-    if (CLibrary::KeyboardTrigger(DIK_1))
+    if (CLibrary::KeyboardTrigger(DIK_1) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_X, 0))
     {
         CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
         CTexture* pTexture = GET_TEXTURE_PTR;
@@ -165,7 +167,7 @@ void CPlayer::SelectHand()
         }
     }
 
-    else if (CLibrary::KeyboardTrigger(DIK_2))
+    else if (CLibrary::KeyboardTrigger(DIK_2) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_Y, 0) )
     {
         CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
         CTexture* pTexture = GET_TEXTURE_PTR;
@@ -189,7 +191,7 @@ void CPlayer::SelectHand()
             break;
         }
     }
-    else if (CLibrary::KeyboardTrigger(DIK_3))
+    else if (CLibrary::KeyboardTrigger(DIK_3) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_B, 0))
     {
         CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
         CTexture* pTexture = GET_TEXTURE_PTR;

@@ -26,6 +26,10 @@
 #include "meshfield.h"
 #include "ground.h"
 #include "cpu.h"
+#include "confetti_factory.h"
+#include "audience.h"
+#include "girle.h"
+#include "judge_flip.h"
 
 //=======================================================================================
 // コンストラクタ
@@ -50,12 +54,19 @@ CGame::~CGame()
 //=======================================================================================
 HRESULT CGame::Init()
 {
+
     if (!m_pCpu)
     {
         m_pCpu = CCpu::Create();
     }
 
     CreatePlayer();
+
+    // 観客の生成
+    m_pAudience = CAudience::Create();
+
+    m_pFlip = CJudgeFlip::Create();
+
     return S_OK;
 }
 
@@ -93,6 +104,23 @@ void CGame::Update()
         CFade *pFade = CManager::GetInstance()->GetFade();
         pFade->SetFade(CManager::MODE_TYPE_TITLE);
     }
+
+    //  紙吹雪出す
+    if (pKey->GetTrigger(DIK_Z))
+    {
+        m_pAudience->SetUpFrag(true);
+        CConfettiFactory::Create(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f),20);
+        CConfettiFactory::Create(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f),20);
+    }
+    if (pKey->GetTrigger(DIK_LEFT))
+    {
+        m_pFlip->SetFlip(CJudgeFlip::STATE_WIN);
+    }
+    if (pKey->GetTrigger(DIK_RIGHT))
+    {
+        m_pFlip->SetFlip(CJudgeFlip::STATE_LOSE);
+    }
+    
 
 #endif // !_DEBUG
 }

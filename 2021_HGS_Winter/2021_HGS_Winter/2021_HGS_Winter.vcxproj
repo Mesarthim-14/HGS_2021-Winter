@@ -144,19 +144,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="audience.cpp" />
     <ClCompile Include="billboard.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="camera_game.cpp" />
     <ClCompile Include="camera_title.cpp" />
     <ClCompile Include="character.cpp" />
-    <ClCompile Include="cpu.cpp" />
+    <ClCompile Include="cpu.cpp" />    <ClCompile Include="confetti.cpp" />
+    <ClCompile Include="confetti_factory.cpp" />
     <ClCompile Include="dummy_model.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="girle.cpp" />
     <ClCompile Include="ground.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="joypad.cpp" />
     <ClCompile Include="judge.cpp" />
+    <ClCompile Include="judge_flip.cpp" />
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="library.cpp" />
     <ClCompile Include="light.cpp" />
@@ -195,19 +199,23 @@
     <ClCompile Include="xfile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="audience.h" />
     <ClInclude Include="billboard.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="camera_game.h" />
     <ClInclude Include="camera_title.h" />
     <ClInclude Include="character.h" />
-    <ClInclude Include="cpu.h" />
+    <ClInclude Include="cpu.h" />    <ClInclude Include="confetti.h" />
+    <ClInclude Include="confetti_factory.h" />
     <ClInclude Include="dummy_model.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="girle.h" />
     <ClInclude Include="ground.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="joypad.h" />
     <ClInclude Include="judge.h" />
+    <ClInclude Include="judge_flip.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="library.h" />
     <ClInclude Include="light.h" />

@@ -1,47 +1,49 @@
-//=============================================================================CGround
+//=============================================================================CJudgeFlip
 //
-// 地面クラス [ground.cpp]
-// Author : Konishi Yuuto
+// ジャッジフリップクラス [judge_flip.cpp]
+// Author : Masuzawa Mirai
 //
 //=============================================================================
 
 //=============================================================================
 // インクルード
 //=============================================================================
-#include "ground.h"
 #include "manager.h"
 #include "renderer.h"
 #include "game.h"
+#include "judge_flip.h"
 #include "texture.h"
 #include "resource_manager.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define SIZE (D3DXVECTOR3(1000.0f, 0.0f, 1000.0f))
-#define GROUND_VERTEX_NUM (INT_VERTEX_2D{5, 5})
+#define POS D3DXVECTOR3(SCREEN_WIDTH/2.0f, SCREEN_HEIGHT/2.0f - 200.0f, 0.0f)
+#define SIZE D3DXVECTOR3(200.0f, 200.0f, 0.0f)
+#define WIN_TEX_NUM CTexture::TEXTURE_NUM_AUDIENCE1
+#define LOSE_TEX_NUM CTexture::TEXTURE_NUM_AUDIENCE2
 
 //=============================================================================
 // コンストラクタ
 //=============================================================================
-CGround::CGround(PRIORITY Priority) : CMeshField(Priority)
+CJudgeFlip::CJudgeFlip(PRIORITY Priority) : CScene2D(Priority)
 {
 }
 
 //=============================================================================
 // デストラクタ
 //=============================================================================
-CGround::~CGround()
+CJudgeFlip::~CJudgeFlip()
 {
 }
 
 //=============================================================================
 // インスタンス生成
 //=============================================================================
-CGround * CGround::Create()
+CJudgeFlip * CJudgeFlip::Create()
 {
     // メモリ確保
-    CGround *pPolygon = new CGround(PRIORITY_1);
+    CJudgeFlip *pPolygon = new CJudgeFlip(PRIORITY_UI);
 
     // !nullcheck
     if (pPolygon)
@@ -58,13 +60,13 @@ CGround * CGround::Create()
 //=============================================================================
 // 初期化処理
 //=============================================================================
-HRESULT CGround::Init()
+HRESULT CJudgeFlip::Init()
 {
     // 初期化処理
-    SetInfo(SIZE, GROUND_VERTEX_NUM);
-    CMeshField::Init();
-    CTexture *pTexture = GET_TEXTURE_PTR;
-    BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_TEST));
+    SetSceneInfo(POS, SIZE);
+    CScene2D::Init();
+
+    BindTexture(GET_TEXTURE_PTR->GetTexture(WIN_TEX_NUM));
 
     return S_OK;
 }
@@ -72,23 +74,39 @@ HRESULT CGround::Init()
 //=============================================================================
 // 終了処理
 //=============================================================================
-void CGround::Uninit()
+void CJudgeFlip::Uninit()
 {
-    CMeshField::Uninit();
+    CScene2D::Uninit();
 }
 
 //=============================================================================
 // 更新処理
 //=============================================================================
-void CGround::Update()
+void CJudgeFlip::Update()
 {
-    CMeshField::Update();
+    CScene2D::Update();
 }
 
 //=============================================================================
 // 描画処理
 //=============================================================================
-void CGround::Draw()
+void CJudgeFlip::Draw()
 {
-    CMeshField::Draw();
+    CScene2D::Draw();
+}
+
+void CJudgeFlip::SetFlip(JUDGE_FLIP_STATE state)
+{
+    switch (state)
+    {
+    case CJudgeFlip::STATE_WIN:
+        BindTexture(GET_TEXTURE_PTR->GetTexture(WIN_TEX_NUM));
+        break;
+    case CJudgeFlip::STATE_LOSE:
+        BindTexture(GET_TEXTURE_PTR->GetTexture(LOSE_TEX_NUM));
+        break;
+
+    default:
+        break;
+    }
 }

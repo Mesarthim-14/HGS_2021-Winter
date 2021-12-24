@@ -37,8 +37,10 @@ public:
     virtual void InitAnimation(const int &nPatternNum, const int &nSpeed, const int &nLoop) = 0;    // アニメーションの設定
     virtual void UpdateAnimation() = 0;                                                             // アニメーションの更新
 
-protected:
     void SetSceneInfo(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);    // シーン情報の設定
+
+protected:
+
 
     // Set関数
     virtual void SetPos(const D3DXVECTOR3 &pos)              { m_pos = pos; }                // 座標

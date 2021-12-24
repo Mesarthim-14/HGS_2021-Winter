@@ -17,6 +17,8 @@
 //=======================================================================================
 class CPlayer;
 class CCpu;
+class CAudience;
+class CJudgeFlip;
 
 //=======================================================================================
 // ゲームクラス
@@ -42,5 +44,7 @@ private:
     // メンバ変数
     CPlayer *m_pPlayer; // プレイヤーのポインタ
     CCpu* m_pCpu;       // CPU
+    CAudience* m_pAudience;  // 観客
+    CJudgeFlip * m_pFlip;    // フリップ
 };
 #endif

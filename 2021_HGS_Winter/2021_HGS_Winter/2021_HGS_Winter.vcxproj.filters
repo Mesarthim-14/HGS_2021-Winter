@@ -210,6 +210,21 @@
     <ClCompile Include="number_2d.cpp">
       <Filter>09_Ui</Filter>
     </ClCompile>
+    <ClCompile Include="confetti.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="confetti_factory.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="girle.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="audience.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="judge_flip.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h">
@@ -358,6 +373,21 @@
     </ClInclude>
     <ClInclude Include="number_2d.h">
       <Filter>09_Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="confetti.h">
+      <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="confetti_factory.h">
+      <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="girle.h">
+      <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="audience.h">
+      <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="judge_flip.h">
+      <Filter>08_Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

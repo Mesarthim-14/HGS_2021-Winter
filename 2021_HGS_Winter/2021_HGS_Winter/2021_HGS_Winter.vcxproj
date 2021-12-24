@@ -156,6 +156,7 @@
     <ClCompile Include="confetti.cpp" />
     <ClCompile Include="confetti_factory.cpp" />
     <ClCompile Include="dummy_model.cpp" />
+    <ClCompile Include="end.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gauge.cpp" />
@@ -219,6 +220,7 @@
     <ClInclude Include="confetti.h" />
     <ClInclude Include="confetti_factory.h" />
     <ClInclude Include="dummy_model.h" />
+    <ClInclude Include="end.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="gauge.h" />

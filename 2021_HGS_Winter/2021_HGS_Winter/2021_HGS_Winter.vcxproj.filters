@@ -261,6 +261,9 @@
     <ClCompile Include="ranking.cpp">
       <Filter>09_Ui</Filter>
     </ClCompile>
+    <ClCompile Include="end.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h">
@@ -445,6 +448,9 @@
     </ClInclude>
     <ClInclude Include="ranking.h">
       <Filter>09_Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="end.h">
+      <Filter>08_Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -15,6 +15,8 @@
 #include "texture.h"
 #include "resource_manager.h"
 #include "judge_flip.h"
+#include "player.h"
+#include "scene2d.h"
 
 //=============================================================================
 // マクロ定義
@@ -86,27 +88,31 @@ void CGauge::Uninit()
 //=============================================================================
 void CGauge::Update()
 {
-    CScene2D::Update();
-
-    m_nCntFrame++;
-
-    if (m_nCntFrame >= m_nMaxFrame)
+    if (!CManager::GetInstance()->GetGame()->GetPlayer()->GetEnd())
     {
-        Uninit();
-        return;
+        CScene2D::Update();
+
+        m_nCntFrame++;
+
+        if (m_nCntFrame >= m_nMaxFrame)
+        {
+            Uninit();
+            return;
+        }
+        // テクスチャアニメーションの管理
+        VERTEX_2D *pVtx;
+        // 頂点バッファをロックし、頂点情報へのポインタを取得
+        GetVtxBuff()->Lock(0, 0, (void**)&pVtx, 0);
+
+        // テクスチャ座標の設定
+        pVtx[0].pos.y = pVtx[2].pos.y - 200.0f * ((float)m_nCntFrame / (float)m_nMaxFrame);
+        pVtx[1].pos.y = pVtx[3].pos.y - 200.0f * ((float)m_nCntFrame / (float)m_nMaxFrame);
+
+
+        // 頂点バッファをアンロックする
+        GetVtxBuff()->Unlock();
+
     }
-    // テクスチャアニメーションの管理
-    VERTEX_2D *pVtx;
-    // 頂点バッファをロックし、頂点情報へのポインタを取得
-    GetVtxBuff()->Lock(0, 0, (void**)&pVtx, 0);
-
-    // テクスチャ座標の設定
-    pVtx[0].pos.y = pVtx[2].pos.y - 200.0f * ((float)m_nCntFrame / (float)m_nMaxFrame);
-    pVtx[1].pos.y = pVtx[3].pos.y - 200.0f * ((float)m_nCntFrame / (float)m_nMaxFrame);
- 
-
-    // 頂点バッファをアンロックする
-    GetVtxBuff()->Unlock();
 }
 
 //=============================================================================

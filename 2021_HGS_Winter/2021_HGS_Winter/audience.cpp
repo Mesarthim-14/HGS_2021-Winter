@@ -45,6 +45,7 @@ CAudience::CAudience(PRIORITY pri) : CScene2D(pri)
     ZeroMemory(&m_basePos, sizeof(m_basePos));
     m_bUp = false;
     m_nCntUp = 0;
+    m_bDraw = false;
     m_nStep = 0;
 }
 
@@ -134,11 +135,21 @@ void CAudience::Update(void)
             m_afMoveY[nCntPats] *= -1;
         }
 
+        if (!m_bDraw)
+        {
+            m_apPolygon[nCntPats]->SetColor(BlackColor);
+        }
+        else
+        {
+            m_apPolygon[nCntPats]->SetColor(WhiteColor);
+        }
+
         m_apPolygon[nCntPats]->SetSceneInfo(m_basePos[nCntPats] + m_aOffsetPos[nCntPats], SIZE);
 
         m_apPolygon[nCntPats]->SetVertexPos();
     }
  
+
    // m_apPolygon[PARTS_FRONT]->SetSceneInfo()
 }
 

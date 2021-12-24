@@ -47,11 +47,12 @@ public:
         TEXTURE_NUM_DRAW,       // 引き分け
         TEXTURE_NUM_LOSE,       // 負け
         TEXTURE_NUM_GIRLE,      // 女の子
-        TEXTURE_NUM_PRESENT_BOX,      // プレゼントボックス
+        TEXTURE_NUM_PRESENT_BOX,    // プレゼントボックス
         TEXTURE_NUM_TITLE,      // タイトル
         TEXTURE_NUM_TUTORIAL,   // チュートリアル
         TEXTURE_NUM_GAME,       // ゲーム
         TEXTURE_NUM_RESULT,     // リザルト
+        TEXTURE_NUM_END,        // 終了
         TEXTURE_NUM_MAX
     };
 

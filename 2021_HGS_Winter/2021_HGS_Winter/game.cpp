@@ -30,6 +30,8 @@
 #include "audience.h"
 #include "girle.h"
 #include "judge_flip.h"
+#include "gauge.h"
+#include "present_box.h"
 
 //=======================================================================================
 // コンストラクタ
@@ -69,6 +71,7 @@ HRESULT CGame::Init()
 
     CGirle::Create();
 
+    CPresentBox::Create();
     return S_OK;
 }
 
@@ -95,7 +98,7 @@ void CGame::Uninit()
 //=======================================================================================
 void CGame::Update()
 {
-
+    m_pAudience->SetStep(m_pPlayer->GetCombo());
 #ifdef _DEBUG
     CInputKeyboard* pKey = CManager::GetInstance()->GetKeyboard();
     CFade::FADE_MODE mode = CManager::GetInstance()->GetFade()->GetFade();

@@ -18,6 +18,7 @@
 #include "game.h"
 #include "player.h"
 #include "judge_flip.h"
+#include "gauge.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -149,7 +150,10 @@ void CCpu::SelectJudge()
         case CORRECT_TYPE_LOSE:
             pFlip->SetFlip((CJudgeFlip::JUDGE_FLIP_STATE)CORRECT_TYPE_LOSE);
             break;
+        default:
+            break;
         }
+        CGauge::Create(m_nInterval);
     }
     switch (nHand)
     {

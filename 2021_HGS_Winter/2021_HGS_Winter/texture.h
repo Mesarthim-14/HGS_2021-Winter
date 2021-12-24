@@ -47,6 +47,7 @@ public:
         TEXTURE_NUM_DRAW,       // 引き分け
         TEXTURE_NUM_LOSE,       // 負け
         TEXTURE_NUM_GIRLE,      // 女の子
+        TEXTURE_NUM_PRESENT_BOX,      // プレゼントボックス
         TEXTURE_NUM_MAX
     };
 

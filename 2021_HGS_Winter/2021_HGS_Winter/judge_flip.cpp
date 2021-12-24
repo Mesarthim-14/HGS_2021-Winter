@@ -14,6 +14,7 @@
 #include "judge_flip.h"
 #include "texture.h"
 #include "resource_manager.h"
+#include "manager.h"
 
 //=============================================================================
 // マクロ定義
@@ -92,7 +93,31 @@ void CJudgeFlip::Draw()
 {
     if (GetTexture())
     {
+        // ステンシルバッファを使う
+        LPDIRECT3DDEVICE9 pDevice = GET_RENDERER_DEVICE;
+
+        // ステンシルテストを有効に
+        pDevice->SetRenderState(D3DRS_STENCILENABLE, TRUE);
+
+
+        // ステンシルテストと比較する参照値設定
+        pDevice->SetRenderState(D3DRS_STENCILREF, JUDGE_FLIP_STENCIL);
+
+        // ステンシルテストの値に対してのマスク設定 0xff(全て真)
+        pDevice->SetRenderState(D3DRS_STENCILMASK, 0xff);
+
+        // この描画での参照値 == ステンシルバッファの参照値なら合格
+        pDevice->SetRenderState(D3DRS_STENCILFUNC, D3DCMP_GREATEREQUAL);
+
+        // ステンシルテストの結果に対しての反映設定
+        pDevice->SetRenderState(D3DRS_STENCILPASS, D3DSTENCILOP_REPLACE);
+        pDevice->SetRenderState(D3DRS_STENCILFAIL, D3DSTENCILOP_KEEP);
+        pDevice->SetRenderState(D3DRS_STENCILZFAIL, D3DSTENCILOP_KEEP);
+
         CScene2D::Draw();
+
+        // ステンシルテストを無効に
+        pDevice->SetRenderState(D3DRS_STENCILENABLE, FALSE);
     }
 }
 

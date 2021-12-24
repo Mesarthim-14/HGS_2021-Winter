@@ -243,6 +243,12 @@
     <ClCompile Include="shader_square.cpp">
       <Filter>06_Effect\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="gauge.cpp">
+      <Filter>09_Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="present_box.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h">
@@ -412,6 +418,12 @@
     </ClInclude>
     <ClInclude Include="shader_square.h">
       <Filter>06_Effect\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="gauge.h">
+      <Filter>09_Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="present_box.h">
+      <Filter>08_Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

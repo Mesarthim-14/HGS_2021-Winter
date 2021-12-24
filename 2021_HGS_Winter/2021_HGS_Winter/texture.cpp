@@ -76,8 +76,8 @@ HRESULT CTexture::SetTextureName()
         { "data/Texture/win.png" },             // 勝ち
         { "data/Texture/draw.png" },            // 引き分け
         { "data/Texture/Lose.png" },            // 負け
-        { "data/Texture/Girl_Character.png" },               // 観客2
-        
+        { "data/Texture/Girl_Character.png" },  // 女の子
+        { "data/Texture/PresentBox.png" },      // プレゼントボックス
     };
 
     // 分割テクスチャ

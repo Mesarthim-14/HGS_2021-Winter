@@ -18,6 +18,7 @@
 #include "cpu.h"
 #include "number_2d.h"
 #include "joypad.h"
+#include "girle.h"
 #include "audience.h"
 #include "confetti_factory.h"
 #include "end.h"
@@ -162,6 +163,7 @@ void CPlayer::SelectHand()
         pScene2D->BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_GU));
         SetHand(HAND_TYPE_GU);
         BindScene2D(pScene2D);
+        CManager::GetInstance()->GetGame()->GetGirle()->SetAnim(CGirle::STATE_DOWN);
 
         // 正解の手を決める
         switch (pCpu->GetCorrect())
@@ -187,6 +189,7 @@ void CPlayer::SelectHand()
         pScene2D->BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_CHOKI));
         SetHand(HAND_TYPE_CHOKI);
         BindScene2D(pScene2D);
+        CManager::GetInstance()->GetGame()->GetGirle()->SetAnim(CGirle::STATE_DOWN);
 
         // 正解の手を決める
         switch (pCpu->GetCorrect())
@@ -211,6 +214,7 @@ void CPlayer::SelectHand()
         pScene2D->BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_PA));
         SetHand(HAND_TYPE_PA);
         BindScene2D(pScene2D);
+        CManager::GetInstance()->GetGame()->GetGirle()->SetAnim(CGirle::STATE_DOWN);
 
         // 正解の手を決める
         switch (pCpu->GetCorrect())

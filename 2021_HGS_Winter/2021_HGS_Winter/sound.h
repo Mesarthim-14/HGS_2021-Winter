@@ -23,6 +23,16 @@ public:
     enum SOUND_LABEL
     {
         SOUND_BGM_TITLE = 0,        // ƒ^ƒCƒgƒ‹
+        SOUND_BGM_GAME,
+        SOUND_SE_BYE,
+        SOUND_SE_CLAP,
+        SOUND_SE_DON,
+        SOUND_SE_DONDON,
+        SOUND_SE_DRAW,
+        SOUND_SE_FINISH,
+        SOUND_SE_HAPPY,
+        SOUND_SE_OUT,
+        SOUND_SE_SAFE,
         SOUND_LABEL_MAX,
     };
 

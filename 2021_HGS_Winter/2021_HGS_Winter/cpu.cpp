@@ -19,6 +19,7 @@
 #include "player.h"
 #include "judge_flip.h"
 #include "gauge.h"
+#include "girle.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -159,6 +160,7 @@ void CCpu::SelectJudge()
             break;
         }
         CGauge::Create(m_nInterval);
+        CManager::GetInstance()->GetGame()->GetGirle()->SetAnim(CGirle::STATE_UP);
     }
     switch (nHand)
     {

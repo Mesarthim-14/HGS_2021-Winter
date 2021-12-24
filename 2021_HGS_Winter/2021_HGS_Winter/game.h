@@ -20,7 +20,7 @@ class CCpu;
 class CAudience;
 class CJudgeFlip;
 class CScene2D;
-
+class CGirle;
 //=======================================================================================
 // ゲームクラス
 //=======================================================================================
@@ -39,6 +39,7 @@ public:
     CCpu* GetCpu()const             { return m_pCpu; }
     CJudgeFlip* GetFlip()const      { return m_pFlip; }
     CAudience* GetAudience()const   { return m_pAudience; }
+    CGirle*GetGirle()const { return m_pGirle; }
 private:
     // private関数
     void CreatePlayer();    // プレイヤーの生成関数
@@ -48,6 +49,7 @@ private:
     CCpu* m_pCpu;       // CPU
     CAudience* m_pAudience;  // 観客
     CJudgeFlip * m_pFlip;    // フリップ
+    CGirle * m_pGirle;    // 女の子
     vector<CScene2D*> m_pObject2D;    // 2Dオブジェクト
     int m_nEndCounter;
 };

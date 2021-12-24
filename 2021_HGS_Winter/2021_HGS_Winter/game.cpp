@@ -42,6 +42,8 @@ CGame::CGame()
 {
     m_pPlayer = nullptr;
     m_pCpu = nullptr;
+
+    m_pGirle = nullptr;
     m_pAudience = nullptr;
     m_nEndCounter = 0;
 }
@@ -60,6 +62,9 @@ CGame::~CGame()
 //=======================================================================================
 HRESULT CGame::Init()
 {
+    CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
+    pSound->Play(CSound::SOUND_BGM_GAME);
+
     // タイトルテクスチャの生成
     CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
     pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_GAME));
@@ -77,7 +82,7 @@ HRESULT CGame::Init()
 
     m_pFlip = CJudgeFlip::Create();
 
-    CGirle::Create();
+    m_pGirle = CGirle::Create();
 
     CPresentBox::Create();
     return S_OK;
@@ -88,16 +93,30 @@ HRESULT CGame::Init()
 //=======================================================================================
 void CGame::Uninit()
 {
+    if (CManager::GetInstance()->CManager::GetResourceManager())
+    {
+        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
+        pSound->Stop(CSound::SOUND_BGM_GAME);
+    }
+
     if (m_pCpu)
     {
         m_pCpu->Uninit();
         m_pCpu = nullptr;
     }
+    
     // プレイヤーの終了処理
     if (m_pPlayer)
     {
         m_pPlayer->Uninit();
         m_pPlayer = nullptr;
+    }
+
+    // プレイヤーの終了処理
+    if (m_pGirle)
+    {
+        m_pGirle->Uninit();
+        m_pGirle = nullptr;
     }
     if (m_pAudience)
     {

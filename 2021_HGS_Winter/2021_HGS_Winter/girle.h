@@ -22,6 +22,12 @@
 class CGirle : public CScene2D
 {
 public:
+    enum TEX_ANIM_STATE
+    {
+        STATE_UP = 0,
+        STATE_DOWN,
+        STATE_MAX
+    };
     CGirle(PRIORITY = PRIORITY_CHARACTER); // コンストラクタ
     ~CGirle();                     // デストラクタ
 
@@ -30,6 +36,8 @@ public:
     void Uninit();             // 終了処理
     void Update();             // 更新処理
     void Draw();
+
+    void SetAnim(TEX_ANIM_STATE state) { m_nTexNum = state; }
 private:
     int m_nTexNum;
     int m_nCntRhythm;

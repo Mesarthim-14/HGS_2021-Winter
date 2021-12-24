@@ -80,7 +80,7 @@ HRESULT CTexture::SetTextureName()
         { "data/Texture/Title.png" },           // タイトル
         { "data/Texture/Tutorial.png" },         // チュートリアル
         { "data/Texture/game_bg.png" },         // ゲーム
-        { "data/Texture/Paper.png" },           // リザルト
+        { "data/Texture/Ranking.png" },           // リザルト
         { "data/Texture/end.png" },           // リザルト
     };
 

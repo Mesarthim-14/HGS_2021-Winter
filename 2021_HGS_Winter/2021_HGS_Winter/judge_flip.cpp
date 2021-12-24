@@ -21,6 +21,7 @@
 //=============================================================================
 #define POS D3DXVECTOR3(SCREEN_WIDTH/2.0f, SCREEN_HEIGHT/2.0f - 200.0f, 0.0f)
 #define SIZE D3DXVECTOR3(200.0f, 200.0f, 0.0f)
+#define DOWN_SIZE D3DXVECTOR3(180.0f, 180.0f, 0.0f)
 #define WIN_TEX_NUM CTexture::TEXTURE_NUM_AUDIENCE1
 #define LOSE_TEX_NUM CTexture::TEXTURE_NUM_AUDIENCE2
 
@@ -84,6 +85,14 @@ void CJudgeFlip::Uninit()
 void CJudgeFlip::Update()
 {
     CScene2D::Update();
+
+    D3DXVECTOR3 size = GetSize();
+
+    size += (SIZE - size)*0.1f;
+
+    SetSize(size);
+
+    SetVertexPos();
 }
 
 //=============================================================================
@@ -139,4 +148,7 @@ void CJudgeFlip::SetFlip(JUDGE_FLIP_STATE state)
     default:
         break;
     }
+
+    SetSize(DOWN_SIZE);
+    SetVertexPos();
 }

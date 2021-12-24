@@ -15,7 +15,17 @@
 //====================================================
 CSound::PARAM CSound::m_aParam[SOUND_LABEL_MAX] =
 {
-    { "data/Sound/BGM/title_bgm.wav", SOUND_LOOP_ON },            // タイトル
+    { "data/Sound/BGM/Title_BGM.wav", SOUND_LOOP_ON },            // タイトル
+    { "data/Sound/BGM/Game_BGM.wav", SOUND_LOOP_ON },
+    { "data/Sound/SE/bye.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/clap.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/don.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/dondon.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/draw.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/finish.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/happy.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/out.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/safe.wav",SOUND_LOOP_OFF },
 };
 
 //================================================

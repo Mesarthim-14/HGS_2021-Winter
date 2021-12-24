@@ -19,6 +19,9 @@
 #include "sound.h"
 #include "joypad.h"
 #include "resource_manager.h"
+#include "player.h"
+#include "number_2d.h"
+#include "game.h"
 
 //=============================================================================
 // コンストラクタ
@@ -46,6 +49,47 @@ HRESULT CResult::Init()
     CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
     pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_RESULT));
     m_pObject2D.push_back(pScene2D);
+
+    // コンボ数
+    int nComboDigit = 0;
+    int nConboNum = CManager::GetInstance()->GetResultScore();
+
+    // 桁数を求める
+    while (nConboNum != 0)
+    {
+        nConboNum /= 10;
+        nComboDigit++;
+    }
+
+    int nScore = CManager::GetInstance()->GetResultScore();
+
+    // スコアの生成
+    for (int nCount = 0; nCount < nComboDigit; nCount++)
+    {
+        // スコアの生成
+        CNumber2d *pNumber2d = CNumber2d::Create(D3DXVECTOR3(400.0f - nCount * 80.0f, 360.0f, 0.0f), D3DXVECTOR3(105.0f, 105.0f, 0.0f));	// 座標、サイズ
+
+        // !nullcheck
+        if (pNumber2d)
+        {
+            // テクスチャのポインタ
+            CTexture *pTexture = GET_TEXTURE_PTR;
+            // テクスチャの設定
+            pNumber2d->BindTexture(
+                pTexture->GetTexture(CTexture::TEXTURE_NUM_NUMBER));	// テクスチャの設定
+
+            if (nCount == 0)
+            {
+                // 数字の設定
+                pNumber2d->SetNumber(nScore);
+            }
+            else
+            {
+                // 数字の設定
+                pNumber2d->SetNumber(nScore / (nCount * 10));
+            }
+        }
+    }
 
     return S_OK;
 }

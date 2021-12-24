@@ -83,6 +83,7 @@ void CGirle::Update(void)
 {
     CScene2D::Update();
 
+    // Ç∏ÇÒÇøÇ·èàóù
     m_nCntRhythm++;
     m_nCntRhythm %= RHYTHM_INTERVAL;
     D3DXVECTOR3 pos = GetPos();

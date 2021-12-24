@@ -39,6 +39,9 @@ public:
     void Draw();               // •`‰æ
 
     void SetUpFrag(bool bUp) { m_bUp = bUp; }
+
+    int GetStep(void) { return m_nStep; };
+    void SetStep(int nStep) { m_nStep = nStep; };
 private:
 
     const static D3DXVECTOR3 m_aUpPos[PARTS_MAX];
@@ -48,6 +51,7 @@ private:
     float       m_afMoveY[PARTS_MAX];
     bool m_bUp;
     int m_nCntUp;
+    int m_nStep;
 
 };
 

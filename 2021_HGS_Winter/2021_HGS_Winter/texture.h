@@ -43,7 +43,7 @@ public:
         TEXTURE_NUM_NUMBER,     // 数字
         TEXTURE_NUM_AUDIENCE1,  // 観客テクスチャ1
         TEXTURE_NUM_AUDIENCE2,  // 観客テクスチャ2
-        TEXTURE_NUM_GIRLE,      // 観客テクスチャ2
+        TEXTURE_NUM_GIRLE,      // 女の子
         TEXTURE_NUM_MAX
     };
 

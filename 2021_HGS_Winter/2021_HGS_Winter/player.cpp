@@ -9,47 +9,42 @@
 #include "player.h"
 #include "manager.h"
 #include "keyboard.h"
-#include "mouse.h"
 #include "renderer.h"
-#include "input.h"
-#include "joypad.h"
-#include "fade.h"
 #include "resource_manager.h"
-#include "motion.h"
 #include "library.h"
-#include "camera.h"
 #include "game.h"
-#include "test_model.h"
-#include "model.h"
-#include "state_player.h"
-#include "state_player_normal.h"
-#include "dummy_model.h"
+#include "scene2d.h"
+#include "texture.h"
+#include "cpu.h"
+#include "number_2d.h"
 
 //=============================================================================
 // マクロ定義
-// Author : Konishi Yuuto
 //=============================================================================
-#define PLAYER_SPEED			(10.0f)     // プレイヤーの移動量
-#define PLAYER_ROT_SPEED		(0.1f)      // キャラクターの回転する速度
+#define TEX_POS     (D3DXVECTOR3(SCREEN_WIDTH / 2 - 200.0f, SCREEN_HEIGHT / 2, 0.0f))
+#define TEX_SIZE    (D3DXVECTOR3(450.0f, 450.0f, 0.0f))
+
+#define COMBO_NUMBER_INTERVAL	(80.0f)														// コンボ数の間隔
+
+// コンボ数UIの情報
+#define COMBO_NUMBER_POS_X  (1100.0f)											// コンボ数の座標
+#define COMBO_NUMBER_POS_Y	(150.0f)													// コンボ数の座標
+#define COMBO_NUMBER_POS	(D3DXVECTOR3(COMBO_NUMBER_POS_X, COMBO_NUMBER_POS_Y, 0.0f))
+
+#define COMBO_NUMBER_SIZE_X (105.0f)															// コンボ数の座標
+#define COMBO_NUMBER_SIZE_Y	(105.0f)															// コンボ数の座標
+#define COMBO_NUMBER_SIZE	(D3DXVECTOR3(COMBO_NUMBER_SIZE_X, COMBO_NUMBER_SIZE_Y, 0.0f))
 
 //=============================================================================
 // コンストラクタ
 // Author : Konishi Yuuto
 //=============================================================================
-CPlayer::CPlayer(PRIORITY Priority) : CCharacter(Priority)
+CPlayer::CPlayer(PRIORITY Priority) : CJudge(Priority)
 {
-	m_rotDest = ZeroVector3;
-	m_bMove = false;
-	m_Inertia = ZeroVector3;
-	m_fInertiaNum = 0.3f;
-	m_fRotationSpeed = 0.1f;
-	m_fAngleSpeed = 0.0f;
-	m_nHP = 60;
-	m_fAngle = 0.0f;
-	m_ActionState = ACTION_NONE;
-	m_pCurrentState = nullptr;
-	m_pNextState = nullptr;
-    m_pModel = nullptr;
+    m_Correct = HAND_TYPE_NONE;    // 勝ち
+    m_nCombo = 0;
+    m_apCombo.clear();
+    m_bCombo = false;
 }
 
 //=============================================================================
@@ -64,7 +59,7 @@ CPlayer::~CPlayer()
 // 生成処理関数
 // Author : Konishi Yuuto
 //=============================================================================
-CPlayer * CPlayer::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
+CPlayer * CPlayer::Create()
 {
     // メモリ確保
     CPlayer *pPlayer = new CPlayer;
@@ -73,7 +68,6 @@ CPlayer * CPlayer::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
     if (pPlayer)
     {
         // 初期化処理
-        pPlayer->SetCharacterInfo(pos, rot);
         pPlayer->Init();
         return pPlayer;
     }
@@ -89,24 +83,8 @@ CPlayer * CPlayer::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 HRESULT CPlayer::Init()
 {
 	// 初期化処理
-	CCharacter::Init();
+	CJudge::Init();
 
-	// 初期化
-	m_rotDest = GetRot();			// 向き
-
-	SetType(CHARACTER_TYPE_PLAYER);	// プレイヤー
-
-	if (!m_pCurrentState)
-	{
-		// インスタンス生成
-		m_pCurrentState = CPlayerStateNormal::Create();
-	}
-
-    if (!m_pModel)
-    {
-        m_pModel = CDummyModel::Create();
-    }
-    SetSpeed(5.0f);
 	return S_OK;
 }
 
@@ -116,103 +94,278 @@ HRESULT CPlayer::Init()
 //=============================================================================
 void CPlayer::Uninit()
 {
-    if (m_pCurrentState)
+    if (m_apCombo.size() != 0)
     {
-        delete m_pCurrentState;
-        m_pCurrentState = nullptr;
+        // ナンバーの終了処理
+        for (auto& pCombo : m_apCombo)
+        {
+            pCombo->Uninit();
+            pCombo = nullptr;
+        }
+        m_apCombo.clear();
     }
 
-    CCharacter::Uninit();
+    // 自身の終了処理
+    CJudge::Uninit();
 }
 
 //=============================================================================
 // 更新関数処理関数
-// Author : Konishi Yuuto
 //=============================================================================
 void CPlayer::Update()
 {
-    // 古い位置設定
-    SetPosOld(GetPos());
+    SetHand(HAND_TYPE_NONE);
 
-	// 状態更新
-	UpdateState();
-
-	CCharacter::Update();
-
-	// 更新処理
-	UpdateRot();
-
-    // モデルに情報を送るよん
-    m_pModel->SetPos(GetPos());
-    m_pModel->SetRot(GetRot());
+    CCpu* pCpu = CManager::GetInstance()->GetGame()->GetCpu();
+    if (pCpu)
+    {
+        // ジャッジフラグが無ければ
+        if (!pCpu->GetJudge())
+        {
+            SelectHand();
+            Judge();
+        }
+    }
 }
 
 //=============================================================================
-// 描画処理関数
-// Author : Konishi Yuuto
+// 手を選ぶ
 //=============================================================================
-void CPlayer::Draw()
+void CPlayer::SelectHand()
 {
-	// 描画
-	CCharacter::Draw();
+    CCpu* pCpu = CManager::GetInstance()->GetGame()->GetCpu();
+    if (!pCpu)
+    {
+        return;
+    }
+
+    // グー
+    if (CLibrary::KeyboardTrigger(DIK_1))
+    {
+        CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
+        CTexture* pTexture = GET_TEXTURE_PTR;
+        pScene2D->BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_GU));
+        SetHand(HAND_TYPE_GU);
+        BindScene2D(pScene2D);
+
+        // 正解の手を決める
+        switch (pCpu->GetCorrect())
+        {
+        case CORRECT_TYPE_WIN:
+            m_Correct = HAND_TYPE_CHOKI;    // 勝てる
+            break;
+        case CORRECT_TYPE_DRAW:
+            m_Correct = HAND_TYPE_GU;       // 引き分け
+            break;
+        case CORRECT_TYPE_LOSE:
+            m_Correct = HAND_TYPE_PA;       // 負ける
+            break;
+        default:
+            break;
+        }
+    }
+
+    else if (CLibrary::KeyboardTrigger(DIK_2))
+    {
+        CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
+        CTexture* pTexture = GET_TEXTURE_PTR;
+        pScene2D->BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_CHOKI));
+        SetHand(HAND_TYPE_CHOKI);
+        BindScene2D(pScene2D);
+
+        // 正解の手を決める
+        switch (pCpu->GetCorrect())
+        {
+        case CORRECT_TYPE_WIN:
+            m_Correct = HAND_TYPE_PA;       // 勝てる
+            break;
+        case CORRECT_TYPE_DRAW:
+            m_Correct = HAND_TYPE_CHOKI;    // 引き分け
+            break;
+        case CORRECT_TYPE_LOSE:
+            m_Correct = HAND_TYPE_GU;       // 負ける
+            break;
+        default:
+            break;
+        }
+    }
+    else if (CLibrary::KeyboardTrigger(DIK_3))
+    {
+        CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
+        CTexture* pTexture = GET_TEXTURE_PTR;
+        pScene2D->BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_PA));
+        SetHand(HAND_TYPE_PA);
+        BindScene2D(pScene2D);
+
+        // 正解の手を決める
+        switch (pCpu->GetCorrect())
+        {
+        case CORRECT_TYPE_WIN:
+            m_Correct = HAND_TYPE_GU;       // 勝てる
+            break;
+        case CORRECT_TYPE_DRAW:
+            m_Correct = HAND_TYPE_PA;       // 引き分け
+            break;
+        case CORRECT_TYPE_LOSE:
+            m_Correct = HAND_TYPE_CHOKI;    // 負ける
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 //=============================================================================
-// 状態の変更
-// Author : Konishi Yuuto
+// 勝ち負け判定
 //=============================================================================
-void CPlayer::ChangeState(CState *pPlayerState)
+void CPlayer::Judge()
 {
-	m_pNextState = pPlayerState;
+    if (GetHand() != HAND_TYPE_NONE)
+    {
+        CCpu* pCpu = CManager::GetInstance()->GetGame()->GetCpu();
+        if (pCpu)
+        {
+            // 敵の手
+            HAND_TYPE nCpuHand = pCpu->GetHand();   // 相手
+            HAND_TYPE nHand = GetHand();            // 自分
+
+            // グーの時
+            if (nCpuHand == m_Correct)
+            {
+                // コンボの判定
+                if (m_nCombo == 0)
+                {
+                    CreateCombo();
+                }
+                else
+                {
+                    AddCombo();
+                }
+            }
+            else
+            {
+                // 間違えコンボ終了
+                EndCombo();
+            }
+        }
+
+        // ジャッジ
+        pCpu->SetJudge(true);
+        m_Correct = HAND_TYPE_NONE;
+    }
 }
 
 //=============================================================================
-// 状態更新
-// Author : Konishi Yuuto
+// コンボの加算
 //=============================================================================
-void CPlayer::UpdateState()
+void CPlayer::AddCombo()
 {
-	if (m_pNextState)
-	{
-		delete m_pCurrentState;
-		m_pCurrentState = nullptr;
+    m_nCombo++;
 
-		m_pCurrentState = m_pNextState;
-		m_pNextState = nullptr;
-	}
+    int nDigit = 0;
+    int nNumber = m_nCombo;
 
-	if (m_pCurrentState)
-	{
-		// 更新処理
-		m_pCurrentState->Update();
-	}
+    // 桁数を求める
+    while (nNumber != 0)
+    {
+        nNumber /= 10;
+        nDigit++;
+    }
+
+    //　桁が増えたら
+    if (m_nCombo == 10 || m_nCombo == 100 || m_nCombo == 1000)
+    {
+        // メモリの確保
+        CNumber2d *pNumber2d = CNumber2d::Create(D3DXVECTOR3(
+            COMBO_NUMBER_POS_X - (nDigit - 1) *COMBO_NUMBER_INTERVAL, COMBO_NUMBER_POS_Y, 0.0f), COMBO_NUMBER_SIZE);	// 座標、サイズ
+
+        if (pNumber2d)
+        {
+            CTexture* pTexture = GET_TEXTURE_PTR;
+            pNumber2d->BindTexture(
+                pTexture->GetTexture(CTexture::TEXTURE_NUM_NUMBER));	// テクスチャの設定
+
+            // 数字の設定
+            pNumber2d->SetNumber(0);
+        }
+
+        // ポインタ取得
+        m_apCombo.push_back(pNumber2d);
+    }
+
+    for (int nCount = 0; nCount < nDigit; nCount++)
+    {
+        // 桁の値を出す
+        int nNum = (m_nCombo / (int)(pow(10, nCount))) % 10;
+
+        // !nullcheck
+        if (m_apCombo.at(nCount) != nullptr)
+        {
+            // 数字の設定
+            m_apCombo.at(nCount)->SetNumber(nNum);
+        }
+    }
+
 }
 
 //=============================================================================
-// 更新処理
-// Author : Konishi Yuuto
+// コンボUi生成
 //=============================================================================
-void CPlayer::UpdateRot()
-{
-	// 角度の取得
-	D3DXVECTOR3 rot = GetRot();
+void CPlayer::CreateCombo()
+{	
+    m_nCombo++;
 
-	while (m_rotDest.y - rot.y > D3DXToRadian(180))
-	{
-		m_rotDest.y -= D3DXToRadian(360);
-	}
+    // コンボ数
+    int nComboDigit = 0;
+    int nConboNum = m_nCombo;
 
-	while (m_rotDest.y - rot.y < D3DXToRadian(-180))
-	{
-		m_rotDest.y += D3DXToRadian(360);
-	}
+    // 桁数を求める
+    while (nConboNum != 0)
+    {
+        nConboNum /= 10;
+        nComboDigit++;
+    }
 
-	// キャラクター回転の速度
-	rot += (m_rotDest - rot) * m_fRotationSpeed;
+    // コンボ数の処理
+    for (int nCount = 0; nCount < nComboDigit; nCount++)
+    {
+        // メモリの確保
+        CNumber2d *pNumber2d = CNumber2d::Create(D3DXVECTOR3(
+            COMBO_NUMBER_POS_X - nCount*COMBO_NUMBER_INTERVAL, COMBO_NUMBER_POS_Y, 0.0f), COMBO_NUMBER_SIZE);
 
-	// 角度の更新処理
-	CLibrary::RotFix(rot.y);
+        // !nullcheck
+        if (pNumber2d)
+        {
+            // テクスチャのポインタ
+            CTexture *pTexture = GET_TEXTURE_PTR;
+            // テクスチャの設定
+            pNumber2d->BindTexture(
+                pTexture->GetTexture(CTexture::TEXTURE_NUM_NUMBER));	// テクスチャの設定
 
-	// 角度の設定
-	SetRot(rot);
+            // 数字の設定
+            pNumber2d->SetNumber(m_nCombo);
+
+            // コンボ数
+            m_apCombo.push_back(pNumber2d);
+        }
+    }
+
+}
+
+//=============================================================================
+// コンボの終了
+//=============================================================================
+void CPlayer::EndCombo()
+{	
+    if (m_apCombo.size() != 0)
+    {
+        for (auto& pCombo : m_apCombo)
+        {
+            pCombo->Uninit();
+            pCombo = nullptr;
+        }
+    }
+
+    m_apCombo.clear();
+    m_nCombo = 0;
 }

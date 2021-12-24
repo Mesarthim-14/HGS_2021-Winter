@@ -62,7 +62,14 @@ HRESULT CTexture::SetTextureName()
     // 通常テクスチャ
     m_aTexFileName[TEXTURE_TYPE_NUM_NORMAL] =
     {
-        { "data/Texture/stage_1.png" },                // テスト
+        { "data/Texture/stage_1.png" },         // テスト
+        { "data/Texture/CPU_Rock.png" },        // グー
+        { "data/Texture/CPU_Scissors.png" },    // チョキ
+        { "data/Texture/CPU_Paper.png" },       // パー
+        { "data/Texture/Rock.png" },            // グー
+        { "data/Texture/Scissors.png" },        // チョキ
+        { "data/Texture/Paper.png" },           // パー
+        { "data/Texture/number_1.png" },           // パー
     };
 
     // 分割テクスチャ

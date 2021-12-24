@@ -53,8 +53,6 @@ CPlayerStateNormal * CPlayerStateNormal::Create()
 //=====================================================================
 void CPlayerStateNormal::Init()
 {
-    // アニメーション設定
-    SetAnimation(UINT((CPlayer::ACTION_MAX - 1) - CPlayer::ACTION_IDOL), 60);
 }
 
 //=====================================================================
@@ -62,14 +60,5 @@ void CPlayerStateNormal::Init()
 //=====================================================================
 void CPlayerStateNormal::Update()
 {
-    // メモリ確保
-    CPlayer *pPlayer = CManager::GetInstance()->GetPlayer();
-    if (!pPlayer)
-    {
-        return;
-    }
-
-    // キーボード移動処理
-    MoveByKeyboard(pPlayer);
 
 }

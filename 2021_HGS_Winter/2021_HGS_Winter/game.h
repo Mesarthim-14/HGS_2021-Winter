@@ -16,6 +16,7 @@
 // 前方宣言
 //=======================================================================================
 class CPlayer;
+class CCpu;
 
 //=======================================================================================
 // ゲームクラス
@@ -31,11 +32,15 @@ public:
     void Update();      // 更新処理
     void Draw();        // 描画処理
 
+    CPlayer* GetPlayer()const { return m_pPlayer; }
+    CCpu* GetCpu()const { return m_pCpu; }
+
 private:
     // private関数
     void CreatePlayer();    // プレイヤーの生成関数
 
     // メンバ変数
-    CPlayer *m_pPlayer;                     // プレイヤーのポインタ
+    CPlayer *m_pPlayer; // プレイヤーのポインタ
+    CCpu* m_pCpu;       // CPU
 };
 #endif

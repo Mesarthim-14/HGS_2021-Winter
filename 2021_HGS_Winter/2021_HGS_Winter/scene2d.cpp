@@ -20,7 +20,7 @@
 CScene2D::CScene2D(PRIORITY Priority) : CSceneBase(Priority)
 {
     m_fRotasion = 0.0f;
-    m_fScaleNum = 0.0f;
+    m_fScaleNum = 1.0f;
     m_fSubFlashNum = 1.0f;
     m_fSubNum = 0.0f;
     m_fFadeSpeedNum = 0.0f;
@@ -395,6 +395,10 @@ void CScene2D::ScaleUp(const float &fScaleUp)
     D3DXVECTOR3 size = GetSize();    // サイズ
     m_fScaleNum += fScaleUp;
 
+    if (m_fScaleNum < 0.0f)
+    {
+        m_fScaleNum = 0.0f;
+    }
     VERTEX_2D*pVtx = nullptr;    //頂点情報へのポインタ
     LPDIRECT3DVERTEXBUFFER9 pVtxBuff = GetVtxBuff();
 

@@ -34,6 +34,13 @@ public:
     {
         TEXTURE_NUM_NONE = -1,  // 初期値 使うとき-1にしてください
         TEXTURE_NUM_TEST,       // テストテクスチャ
+        TEXTURE_NUM_CPU_GU,     // グー
+        TEXTURE_NUM_CPU_CHOKI,  // チョキ
+        TEXTURE_NUM_CPU_PA,     // パー
+        TEXTURE_NUM_GU,         // グー
+        TEXTURE_NUM_CHOKI,      // チョキ
+        TEXTURE_NUM_PA,         // パー
+        TEXTURE_NUM_NUMBER,     // 数字
         TEXTURE_NUM_MAX
     };
 

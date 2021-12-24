@@ -24,21 +24,21 @@ public:
     static CScene2D* Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size);                           // インスタンス生成
     static CScene2D* Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &size, const float &fFadeNum);    // インスタンス生成(フェード有り)
 
-    HRESULT Init(); // 初期化処理
-    void Uninit();  // 終了処理
-    void Update();  // 更新処理
-    void Draw();    // 描画処理
+    HRESULT Init();                         // 初期化処理
+    void Uninit();                          // 終了処理
+    void Update();                          // 更新処理
+    void Draw();                            // 描画処理
+    void ScaleUp(const float &fScaleUp);    // 拡大関数
 
 protected:
     void SetVertexPos();                                                                // 頂点の設定
     void InitAnimation(const int &nPatternNum, const int &nSpeed, const int &nLoop);    // アニメーション情報初期化
     void InitScroll(const int &nSpeed, const float &fDivision);                         // 画像スクロールの設定
-    void ScaleUp(const float &fScaleUp);                                                // 拡大関数
     void FlashPolygon(const float &fFlashFlame);                                          // ポリゴンの点滅
 
     // Set関数
     void SetColor(const D3DXCOLOR &col) override;                               // 色の設定
-    void SetRotation(const float& rotasion);                                           // 回転の設定
+    void SetRotation(const float& rotasion);                                    // 回転の設定
     void SetScale(const float &fScale);                                         // 拡大の値設定
     void SetSubFlashNum(const float &fSubNum) { m_fSubNum = fSubNum; }   // 点滅の値設定
 

@@ -58,6 +58,9 @@
     <Filter Include="10_State\StatePlayer">
       <UniqueIdentifier>{760c0323-3f6e-4722-9b28-44463eefc611}</UniqueIdentifier>
     </Filter>
+    <Filter Include="11_judge">
+      <UniqueIdentifier>{4dba2e6f-2b12-4a77-b64a-8d6de8ef3e49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp">
@@ -198,6 +201,15 @@
     <ClCompile Include="ground.cpp">
       <Filter>08_Object</Filter>
     </ClCompile>
+    <ClCompile Include="cpu.cpp">
+      <Filter>11_judge</Filter>
+    </ClCompile>
+    <ClCompile Include="judge.cpp">
+      <Filter>11_judge</Filter>
+    </ClCompile>
+    <ClCompile Include="number_2d.cpp">
+      <Filter>09_Ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h">
@@ -337,6 +349,15 @@
     </ClInclude>
     <ClInclude Include="ground.h">
       <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="cpu.h">
+      <Filter>11_judge</Filter>
+    </ClInclude>
+    <ClInclude Include="judge.h">
+      <Filter>11_judge</Filter>
+    </ClInclude>
+    <ClInclude Include="number_2d.h">
+      <Filter>09_Ui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

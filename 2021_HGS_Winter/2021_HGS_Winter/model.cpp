@@ -62,24 +62,6 @@ CModel * CModel::Create(const D3DXVECTOR3 &pos, const D3DXVECTOR3 &rot)
 //=============================================================================
 bool CModel::PlayerDisCollision(const float &fDistanse)
 {
-    // À•W‚ÌŽæ“¾
-    CPlayer* pPlayer = CManager::GetInstance()->GetPlayer();
-    if (!pPlayer)
-    {
-        return false;
-    }
-    D3DXVECTOR3 PPos = pPlayer->GetPos();
-    D3DXVECTOR3 ThisPos = GetModelInfo()->GetPos();
-
-    // ‹——£‚ÌŽæ“¾
-    float fDistance = CLibrary::CalDistance(PPos, ThisPos);
-
-    // ‹——£‚ð‘ª‚é
-    if (fDistance <= fDistanse)
-    {
-        return true;
-    }
-
     return false;
 }
 

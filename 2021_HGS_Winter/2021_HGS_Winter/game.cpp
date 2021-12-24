@@ -25,6 +25,7 @@
 #include "state_player_normal.h"
 #include "meshfield.h"
 #include "ground.h"
+#include "cpu.h"
 
 //=======================================================================================
 // コンストラクタ
@@ -32,6 +33,7 @@
 CGame::CGame()
 {
     m_pPlayer = nullptr;
+    m_pCpu = nullptr;
 }
 
 //=======================================================================================
@@ -48,13 +50,12 @@ CGame::~CGame()
 //=======================================================================================
 HRESULT CGame::Init()
 {
-    CTestModel::Create();
+    if (!m_pCpu)
+    {
+        m_pCpu = CCpu::Create();
+    }
 
-    // プレイヤーの生成
     CreatePlayer();
-
-    CGround::Create();
-
     return S_OK;
 }
 
@@ -63,6 +64,11 @@ HRESULT CGame::Init()
 //=======================================================================================
 void CGame::Uninit()
 {
+    if (m_pCpu)
+    {
+        m_pCpu->Uninit();
+        m_pCpu = nullptr;
+    }
     // プレイヤーの終了処理
     if (m_pPlayer)
     {
@@ -106,7 +112,6 @@ void CGame::CreatePlayer()
     // プレイヤーの生成
     if (!m_pPlayer)
     {
-        m_pPlayer = CPlayer::Create(ZeroVector3, ZeroVector3);
-    //    m_pPlayer->ChangeState(CPlayerStateNormal::Create());
+        m_pPlayer = CPlayer::Create();
     }
 }

@@ -377,34 +377,6 @@ CModeBase * CManager::GetModePtr()
 }
 
 //=============================================================================
-// プレイヤーのポインタ
-//=============================================================================
-CPlayer * CManager::GetPlayer()const 
-{
-    CCharacter *pScene = (CCharacter*)CScene::GetTop(CScene::PRIORITY_CHARACTER);
-
-    // プレイヤーの情報取得
-    if (pScene)
-    {
-        while (pScene)
-        {
-            // 現在のポインタ
-            CCharacter *pNext = (CCharacter*)pScene->GetNext();
-
-            if (pScene->GetType() == CCharacter::CHARACTER_TYPE_PLAYER)
-            {
-                return (CPlayer*)pScene;
-            }
-
-            // 次のポインタ取得
-            pScene = pNext;
-        }
-    }
-
-    return nullptr;
-}
-
-//=============================================================================
 // ゲームモードの取得
 //=============================================================================
 CGame * CManager::GetGame() const

@@ -41,7 +41,7 @@ CGround::~CGround()
 CGround * CGround::Create()
 {
     // ÉÅÉÇÉäämï€
-    CGround *pPolygon = new CGround(PRIORITY_UI);
+    CGround *pPolygon = new CGround(PRIORITY_1);
 
     // !nullcheck
     if (pPolygon)

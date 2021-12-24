@@ -52,8 +52,6 @@ void CPlayerState::MoveByKeyboard(CPlayer* &pPlayer)
     D3DXVECTOR3 rot = pPlayer->GetRot();            // 角度
     float fSpeed = pPlayer->GetSpeed();             // 移動量
     float fCameraRot = D3DXToRadian(CManager::GetInstance()->GetCamera()->GetRot().y);    // カメラの角度
-    float fRot = D3DXToRadian(CManager::GetInstance()->GetCamera()->GetHorizontal());    // カメラの角度
-
     float fAngle = pPlayer->GetAngle();             // アングル
     D3DXVECTOR3 Inertia = pPlayer->GetInertia();    // 慣性
     D3DXVECTOR3 rotDest = pPlayer->GetRotDest();    // 目的の角度
@@ -64,8 +62,8 @@ void CPlayerState::MoveByKeyboard(CPlayer* &pPlayer)
     if (CLibrary::KeyboardPress(DIK_W))
     {
         // 移動量・角度の設定
-        Inertia.x = +sinf(fAngle+ fRot)*fSpeed;
-        Inertia.z = -cosf(fAngle+ fRot)*fSpeed;
+        Inertia.x = +sinf(fAngle)*fSpeed;
+        Inertia.z = -cosf(fAngle)*fSpeed;
         //進行方向に向きを合わせる
         rotDest.y = atan2f(Inertia.x, Inertia.z) + D3DXToRadian(180.0f);
         m_bMove[0] = true;
@@ -75,8 +73,8 @@ void CPlayerState::MoveByKeyboard(CPlayer* &pPlayer)
     if (CLibrary::KeyboardPress(DIK_S))
     {
         // 移動量・角度の設定
-        Inertia.x = -sinf((fAngle+ fRot))*fSpeed;
-        Inertia.z = +cosf((fAngle + fRot))*fSpeed;
+        Inertia.x = -sinf((fAngle))*fSpeed;
+        Inertia.z = +cosf((fAngle))*fSpeed;
         //進行方向に向きを合わせる
         rotDest.y = atan2f(Inertia.x, Inertia.z) + D3DXToRadian(-180.0f);
         m_bMove[0] = true;
@@ -86,8 +84,8 @@ void CPlayerState::MoveByKeyboard(CPlayer* &pPlayer)
     if (CLibrary::KeyboardPress(DIK_A))
     {
         // 移動量・角度の設定
-        Inertia.x = +sinf((fAngle + fRot+ D3DXToRadian(90.0f)))*fSpeed;
-        Inertia.z = -cosf((fAngle + fRot+ D3DXToRadian(90.0f)))*fSpeed;
+        Inertia.x = +sinf((fAngle + D3DXToRadian(90.0f)))*fSpeed;
+        Inertia.z = -cosf((fAngle + D3DXToRadian(90.0f)))*fSpeed;
 
         //進行方向に向きを合わせる
         rotDest.y = atan2f(Inertia.x, Inertia.z) + D3DXToRadian(180.0f);

@@ -198,6 +198,12 @@
     <ClCompile Include="ground.cpp">
       <Filter>08_Object</Filter>
     </ClCompile>
+    <ClCompile Include="confetti.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="confetti_factory.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="camera.h">
@@ -336,6 +342,12 @@
       <Filter>08_Object</Filter>
     </ClInclude>
     <ClInclude Include="ground.h">
+      <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="confetti.h">
+      <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="confetti_factory.h">
       <Filter>08_Object</Filter>
     </ClInclude>
   </ItemGroup>

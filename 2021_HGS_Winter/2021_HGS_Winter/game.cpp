@@ -25,6 +25,7 @@
 #include "state_player_normal.h"
 #include "meshfield.h"
 #include "ground.h"
+#include "confetti_factory.h"
 
 //=======================================================================================
 // コンストラクタ
@@ -86,6 +87,13 @@ void CGame::Update()
     {
         CFade *pFade = CManager::GetInstance()->GetFade();
         pFade->SetFade(CManager::MODE_TYPE_TITLE);
+    }
+
+    //  紙吹雪出す
+    if (pKey->GetTrigger(DIK_Z))
+    {
+        CConfettiFactory::Create(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f),20);
+        CConfettiFactory::Create(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f),20);
     }
 
 #endif // !_DEBUG

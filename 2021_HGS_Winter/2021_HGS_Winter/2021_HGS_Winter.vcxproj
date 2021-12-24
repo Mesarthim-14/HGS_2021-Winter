@@ -149,6 +149,8 @@
     <ClCompile Include="camera_game.cpp" />
     <ClCompile Include="camera_title.cpp" />
     <ClCompile Include="character.cpp" />
+    <ClCompile Include="confetti.cpp" />
+    <ClCompile Include="confetti_factory.cpp" />
     <ClCompile Include="dummy_model.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="game.cpp" />
@@ -197,6 +199,8 @@
     <ClInclude Include="camera_game.h" />
     <ClInclude Include="camera_title.h" />
     <ClInclude Include="character.h" />
+    <ClInclude Include="confetti.h" />
+    <ClInclude Include="confetti_factory.h" />
     <ClInclude Include="dummy_model.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="game.h" />

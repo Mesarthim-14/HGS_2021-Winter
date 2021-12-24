@@ -18,12 +18,14 @@
 #include "cpu.h"
 #include "number_2d.h"
 #include "joypad.h"
+#include "audience.h"
+#include "confetti_factory.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define TEX_POS     (D3DXVECTOR3(SCREEN_WIDTH / 2 - 300.0f, SCREEN_HEIGHT / 2, 0.0f))
-#define TEX_SIZE    (D3DXVECTOR3(450.0f, 450.0f, 0.0f))
+#define TEX_POS     (D3DXVECTOR3(SCREEN_WIDTH / 2 - 500.0f, SCREEN_HEIGHT / 2, 0.0f))
+#define TEX_SIZE    (D3DXVECTOR3(700.0f, 500.0f, 0.0f))
 
 #define COMBO_NUMBER_INTERVAL	(80.0f)														// コンボ数の間隔
 
@@ -242,7 +244,12 @@ void CPlayer::Judge()
                 else
                 {
                     AddCombo();
+
                 }
+
+                CreateEffect();
+
+
             }
             else
             {
@@ -370,4 +377,32 @@ void CPlayer::EndCombo()
 
     m_apCombo.clear();
     m_nCombo = 0;
+}
+
+//=============================================================================
+// エフェクトの生成
+//=============================================================================
+void CPlayer::CreateEffect()
+{
+    if (m_nCombo == 10)
+    {
+        CAudience* pAudience = CManager::GetInstance()->GetGame()->GetAudience();
+        pAudience->SetDrawFlag();
+    }
+
+    if (m_nCombo >= 20)
+    {
+        CRenderer* pRenderer = CManager::GetInstance()->GetRenderer();
+        pRenderer->SetShockBlur(true, 20.0f);
+    }
+    if (m_nCombo >= 30)
+    {
+        CConfettiFactory::Create(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f), 20);
+        CConfettiFactory::Create(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 20);
+    }
+    if (m_nCombo >= 40)
+    {
+        CConfettiFactory::Create(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f), 20);
+        CConfettiFactory::Create(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 20);
+    }
 }

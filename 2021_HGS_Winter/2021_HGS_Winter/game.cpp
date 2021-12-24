@@ -38,6 +38,7 @@ CGame::CGame()
 {
     m_pPlayer = nullptr;
     m_pCpu = nullptr;
+    m_pAudience = nullptr;
 }
 
 //=======================================================================================
@@ -85,6 +86,11 @@ void CGame::Uninit()
     {
         m_pPlayer->Uninit();
         m_pPlayer = nullptr;
+    }
+    if (m_pAudience)
+    {
+        m_pAudience->Uninit();
+        m_pAudience = nullptr;
     }
 }
 

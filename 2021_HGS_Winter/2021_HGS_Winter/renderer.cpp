@@ -292,6 +292,7 @@ void CRenderer::Draw()
         if (m_bShockBlur)
         {
             m_pShockBlur->Begin();
+            m_pShockBlur->SubPower(0.5f);
         }
 
 		//オブジェクトクラスの全描画処理呼び出し

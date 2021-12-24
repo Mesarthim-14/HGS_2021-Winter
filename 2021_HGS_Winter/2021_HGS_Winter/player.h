@@ -28,10 +28,11 @@ public:
 
     static CPlayer*Create();    // クリエイト
 
-    HRESULT Init(); // 初期化処理
-    void Uninit();  // 終了処理
-    void Update();  // 更新処理
-    void EndCombo();    // コンボ終了
+    HRESULT Init();         // 初期化処理
+    void Uninit();          // 終了処理
+    void Update();          // 更新処理
+    void EndCombo();        // コンボ終了
+    void CreateEffect();    // 演出の生成
 
     // Get関数
     int GetCombo()const { return m_nCombo; }

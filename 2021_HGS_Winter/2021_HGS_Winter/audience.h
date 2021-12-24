@@ -38,7 +38,8 @@ public:
     void Update();             // çXêVèàóù
     void Draw();               // ï`âÊ
 
-    void SetUpFrag(bool bUp) { m_bUp = bUp; }
+    void SetUpFrag(bool bUp)    { m_bUp = bUp; }
+    void SetDrawFlag()          { m_bDraw = true; }
 private:
 
     const static D3DXVECTOR3 m_aUpPos[PARTS_MAX];
@@ -47,6 +48,7 @@ private:
     D3DXVECTOR3 m_aOffsetPos[PARTS_MAX];
     float       m_afMoveY[PARTS_MAX];
     bool m_bUp;
+    bool m_bDraw;
     int m_nCntUp;
 
 };

@@ -80,7 +80,8 @@ HRESULT CTexture::SetTextureName()
         { "data/Texture/Title.png" },           // タイトル
         { "data/Texture/stage_1.png" },         // チュートリアル
         { "data/Texture/game_bg.png" },         // ゲーム
-        { "data/Texture/Paper.png" },           // リザルト
+        { "data/Texture/Ranking.png" },           // リザルト
+        { "data/Texture/end.png" },           // リザルト
     };
 
     // 分割テクスチャ

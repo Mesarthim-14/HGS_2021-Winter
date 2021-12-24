@@ -246,9 +246,6 @@
     <ClCompile Include="result.cpp">
       <Filter>03_Mode\Result</Filter>
     </ClCompile>
-    <ClCompile Include="ranking.cpp">
-      <Filter>00_Important</Filter>
-    </ClCompile>
     <ClCompile Include="shock_blur.cpp">
       <Filter>06_Effect\Shader\ShockBlur</Filter>
     </ClCompile>
@@ -259,6 +256,12 @@
       <Filter>09_Ui</Filter>
     </ClCompile>
     <ClCompile Include="present_box.cpp">
+      <Filter>08_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ranking.cpp">
+      <Filter>09_Ui</Filter>
+    </ClCompile>
+    <ClCompile Include="end.cpp">
       <Filter>08_Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -431,9 +434,6 @@
     <ClInclude Include="tutorial.h">
       <Filter>03_Mode\tutorial</Filter>
     </ClInclude>
-    <ClInclude Include="ranking.h">
-      <Filter>00_Important</Filter>
-    </ClInclude>
     <ClInclude Include="shock_blur.h">
       <Filter>06_Effect\Shader\ShockBlur</Filter>
     </ClInclude>
@@ -444,6 +444,12 @@
       <Filter>09_Ui</Filter>
     </ClInclude>
     <ClInclude Include="present_box.h">
+      <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ranking.h">
+      <Filter>09_Ui</Filter>
+    </ClInclude>
+    <ClInclude Include="end.h">
       <Filter>08_Object</Filter>
     </ClInclude>
   </ItemGroup>

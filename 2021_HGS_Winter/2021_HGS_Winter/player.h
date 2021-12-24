@@ -16,6 +16,7 @@
 // クラス定義
 //=============================================================================
 class CNumber2d;
+class CEnd;
 
 //=============================================================================
 // プレイヤークラス
@@ -33,9 +34,11 @@ public:
     void Update();          // 更新処理
     void EndCombo();        // コンボ終了
     void CreateEffect();    // 演出の生成
+    void End();
 
     // Get関数
     int GetCombo()const { return m_nCombo; }
+    CEnd* GetEnd()const {return m_pEnd; }
 
 private:
     void SelectHand();  // 手を選ぶ
@@ -47,5 +50,6 @@ private:
     vector<CNumber2d*> m_apCombo;   // コンボ用ポインタ
     int m_nCombo;                   // コンボ
     bool m_bCombo;                  // コンボを使用しているか
+    CEnd* m_pEnd;
 };
 #endif

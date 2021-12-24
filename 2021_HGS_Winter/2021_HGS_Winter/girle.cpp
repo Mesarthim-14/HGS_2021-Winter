@@ -28,7 +28,7 @@
 //=============================
 CGirle::CGirle(PRIORITY pri) : CScene2D(pri)
 {
-    m_nTexNum = 0;
+    m_nTexNum = STATE_DOWN;
     m_nCntRhythm = 0;
 }
 
@@ -45,7 +45,7 @@ CGirle::~CGirle()
 CGirle * CGirle::Create(void)
 {
     // ƒƒ‚ƒŠ‚ÌŠm•Û
-    CGirle *pGirle = new CGirle;
+    CGirle *pGirle = new CGirle(PRIORITY_CHARACTER);
     // ‰Šú‰»
     pGirle->Init();
 
@@ -64,6 +64,8 @@ HRESULT CGirle::Init(void)
 
     BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_GIRLE));
     m_nCntRhythm = 0;
+    m_nTexNum = STATE_DOWN;
+
     return S_OK;
 }
 

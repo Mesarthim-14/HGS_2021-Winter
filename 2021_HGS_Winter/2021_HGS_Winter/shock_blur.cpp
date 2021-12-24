@@ -195,7 +195,7 @@ void CShockBlur::Begin()
     m_pd3dDevice->Clear(0L,
         nullptr,
         D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
-        BlackColor,
+        WhiteColor,
         1.0f,
         0L);
 }

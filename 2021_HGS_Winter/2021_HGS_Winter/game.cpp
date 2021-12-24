@@ -42,7 +42,10 @@ CGame::CGame()
 {
     m_pPlayer = nullptr;
     m_pCpu = nullptr;
+
+    m_pGirle = nullptr;
     m_pAudience = nullptr;
+    m_nEndCounter = 0;
 }
 
 //=======================================================================================
@@ -79,7 +82,7 @@ HRESULT CGame::Init()
 
     m_pFlip = CJudgeFlip::Create();
 
-    CGirle::Create();
+    m_pGirle = CGirle::Create();
 
     CPresentBox::Create();
     return S_OK;
@@ -101,11 +104,19 @@ void CGame::Uninit()
         m_pCpu->Uninit();
         m_pCpu = nullptr;
     }
+    
     // プレイヤーの終了処理
     if (m_pPlayer)
     {
         m_pPlayer->Uninit();
         m_pPlayer = nullptr;
+    }
+
+    // プレイヤーの終了処理
+    if (m_pGirle)
+    {
+        m_pGirle->Uninit();
+        m_pGirle = nullptr;
     }
     if (m_pAudience)
     {
@@ -119,10 +130,20 @@ void CGame::Uninit()
 //=======================================================================================
 void CGame::Update()
 {
+    CFade::FADE_MODE mode = CManager::GetInstance()->GetFade()->GetFade();
+
     m_pAudience->SetStep(m_pPlayer->GetCombo());
+    if (m_pPlayer->GetEnd())
+    {
+        if (CLibrary::CounterLimit(200, m_nEndCounter) && mode == CFade::FADE_MODE_NONE)
+        {
+            CFade *pFade = CManager::GetInstance()->GetFade();
+            pFade->SetFade(CManager::MODE_TYPE_RESULT);
+        }
+    }
+
 #ifdef _DEBUG
     CInputKeyboard* pKey = CManager::GetInstance()->GetKeyboard();
-    CFade::FADE_MODE mode = CManager::GetInstance()->GetFade()->GetFade();
 
     // タイトルに戻る
     if (pKey->GetTrigger(DIK_TAB) && mode == CFade::FADE_MODE_NONE)

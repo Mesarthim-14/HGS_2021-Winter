@@ -95,6 +95,9 @@ HRESULT CPlayer::Init()
 //=============================================================================
 void CPlayer::Uninit()
 {
+    // リザルト用スコアの設定
+    CManager::GetInstance()->SetResultScore(m_nCombo);
+
     if (m_apCombo.size() != 0)
     {
         // ナンバーの終了処理

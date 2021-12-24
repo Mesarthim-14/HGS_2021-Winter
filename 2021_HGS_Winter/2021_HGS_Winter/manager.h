@@ -65,6 +65,7 @@ public:
 
     // Set関数
     void SetMode(const MODE_TYPE &mode);    // モードの設定
+    void SetResultScore(const int &nScore) { m_nResultScore = nScore; } // リザルト用スコアの設定
 
     // Get関数
     static CManager* GetInstance();                                                                 // インスタンス情報
@@ -82,6 +83,7 @@ public:
     CLight *GetLight()const                          { return m_pLight.get(); }              // ライトのポインタ
     static void SetActivePause(const bool &bPause)   { m_bPause = bPause; }                  // ポーズのセット
     static bool GetActivePause()                     { return m_bPause; }                    // フェードの取得処理
+    int GetResultScore()const                       { return m_nResultScore; }               // リザルト用スコアの取得
 
 private:
     // private関数
@@ -106,6 +108,8 @@ private:
     static CManager* m_pManager;    // 自身のポインタ
 
     static bool m_bPause;           // ポーズフラグ
+
+    static int m_nResultScore;      // リザルト用スコア
 };
 
 #endif

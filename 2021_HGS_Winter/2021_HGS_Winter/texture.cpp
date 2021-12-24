@@ -76,7 +76,6 @@ HRESULT CTexture::SetTextureName()
         { "data/Texture/win.png" },             // 勝ち
         { "data/Texture/draw.png" },            // 引き分け
         { "data/Texture/Lose.png" },            // 負け
-
         { "data/Texture/Title.png" },           // タイトル
         { "data/Texture/stage_1.png" },         // チュートリアル
         { "data/Texture/game_bg.png" },         // ゲーム

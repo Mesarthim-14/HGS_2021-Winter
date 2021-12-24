@@ -19,6 +19,7 @@ class CPlayer;
 class CCpu;
 class CAudience;
 class CJudgeFlip;
+class CScene2D;
 
 //=======================================================================================
 // ゲームクラス
@@ -46,5 +47,6 @@ private:
     CCpu* m_pCpu;       // CPU
     CAudience* m_pAudience;  // 観客
     CJudgeFlip * m_pFlip;    // フリップ
+    vector<CScene2D*> m_pObject2D;    // 2Dオブジェクト
 };
 #endif

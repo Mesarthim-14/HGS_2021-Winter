@@ -30,6 +30,8 @@
 #include "audience.h"
 #include "girle.h"
 #include "judge_flip.h"
+#include "texture.h"
+#include "scene2d.h"
 
 //=======================================================================================
 // コンストラクタ
@@ -54,6 +56,10 @@ CGame::~CGame()
 //=======================================================================================
 HRESULT CGame::Init()
 {
+    // タイトルテクスチャの生成
+    CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
+    pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_GAME));
+    m_pObject2D.push_back(pScene2D);
 
     if (!m_pCpu)
     {

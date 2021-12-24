@@ -150,7 +150,8 @@
     <ClCompile Include="camera_game.cpp" />
     <ClCompile Include="camera_title.cpp" />
     <ClCompile Include="character.cpp" />
-    <ClCompile Include="cpu.cpp" />    <ClCompile Include="confetti.cpp" />
+    <ClCompile Include="cpu.cpp" />
+    <ClCompile Include="confetti.cpp" />
     <ClCompile Include="confetti_factory.cpp" />
     <ClCompile Include="dummy_model.cpp" />
     <ClCompile Include="fade.cpp" />
@@ -183,6 +184,8 @@
     <ClCompile Include="scene2d.cpp" />
     <ClCompile Include="scene3D.cpp" />
     <ClCompile Include="scene_base.cpp" />
+    <ClCompile Include="shader_square.cpp" />
+    <ClCompile Include="shock_blur.cpp" />
     <ClCompile Include="sound.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="state_camera.cpp" />
@@ -205,7 +208,8 @@
     <ClInclude Include="camera_game.h" />
     <ClInclude Include="camera_title.h" />
     <ClInclude Include="character.h" />
-    <ClInclude Include="cpu.h" />    <ClInclude Include="confetti.h" />
+    <ClInclude Include="cpu.h" />
+    <ClInclude Include="confetti.h" />
     <ClInclude Include="confetti_factory.h" />
     <ClInclude Include="dummy_model.h" />
     <ClInclude Include="fade.h" />
@@ -238,6 +242,8 @@
     <ClInclude Include="scene2d.h" />
     <ClInclude Include="scene3D.h" />
     <ClInclude Include="scene_base.h" />
+    <ClInclude Include="shader_square.h" />
+    <ClInclude Include="shock_blur.h" />
     <ClInclude Include="sound.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="state_camera.h" />
@@ -252,6 +258,11 @@
     <ClInclude Include="texture_animation.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="xfile.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\Text\Shader\ShockBlur.fx">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -64,6 +64,15 @@
     <Filter Include="06_Effect\confetti">
       <UniqueIdentifier>{a42f8be2-a805-47c5-ad0f-2e619836cc95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06_Effect\Shader">
+      <UniqueIdentifier>{2db07cc1-37b9-49d4-9485-0a5af2a8d993}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06_Effect\Shader\ShockBlur">
+      <UniqueIdentifier>{22cb7a69-16d9-4663-9e4f-556281eba518}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06_Effect\Shader\ShockBlur\fx">
+      <UniqueIdentifier>{7e757eb8-f088-45b6-8c49-ae34a1feb3ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp">
@@ -227,6 +236,12 @@
     </ClCompile>
     <ClCompile Include="confetti_factory.cpp">
       <Filter>06_Effect\confetti</Filter>
+    </ClCompile>
+    <ClCompile Include="shock_blur.cpp">
+      <Filter>06_Effect\Shader\ShockBlur</Filter>
+    </ClCompile>
+    <ClCompile Include="shader_square.cpp">
+      <Filter>06_Effect\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -392,5 +407,16 @@
     <ClInclude Include="confetti_factory.h">
       <Filter>06_Effect\confetti</Filter>
     </ClInclude>
+    <ClInclude Include="shock_blur.h">
+      <Filter>06_Effect\Shader\ShockBlur</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_square.h">
+      <Filter>06_Effect\Shader</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\Text\Shader\ShockBlur.fx">
+      <Filter>06_Effect\Shader\ShockBlur\fx</Filter>
+    </None>
   </ItemGroup>
 </Project>

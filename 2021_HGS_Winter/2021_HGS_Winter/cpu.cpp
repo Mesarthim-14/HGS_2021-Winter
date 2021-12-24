@@ -17,11 +17,12 @@
 #include "texture.h"
 #include "game.h"
 #include "player.h"
+#include "judge_flip.h"
 
 //=============================================================================
 // マクロ定義
 //=============================================================================
-#define POS         (D3DXVECTOR3(SCREEN_WIDTH/2 + 200.0f, SCREEN_HEIGHT/2, 0.0f))   // 座標
+#define POS         (D3DXVECTOR3(SCREEN_WIDTH/2 + 300.0f, SCREEN_HEIGHT/2, 0.0f))   // 座標
 #define SIZE        (D3DXVECTOR3(450.0f, 450.0f, 0.0f))                             // サイズ
 #define INTERVAL    (200)                                                           // 間隔
 
@@ -31,8 +32,10 @@
 CCpu::CCpu(PRIORITY Priority) : CJudge(Priority)
 {
     m_nCounter = 0;
-    m_bJudge = false;
+    m_bJudge = true;
     m_Correct = CORRECT_TYPE_NONE;
+    m_nInterval = INTERVAL;
+    m_nSubInter = 0;
 }
 
 //=============================================================================
@@ -85,16 +88,18 @@ void CCpu::Uninit()
 //=============================================================================
 void CCpu::Update()
 {
-    if (m_nCounter >= INTERVAL - 15)
+    if (m_nCounter >= m_nInterval - 15)
     {
         CScene2D* pScene = GetScene();
         if (pScene)
         {
+            // スケール
             pScene->ScaleUp(-0.02f);
         }
     }
 
-    if (CLibrary::CounterLimit(INTERVAL, m_nCounter))
+    // 判定
+    if (CLibrary::CounterLimit(m_nInterval, m_nCounter))
     {
         SelectJudge();
     }
@@ -113,20 +118,39 @@ void CCpu::Draw()
 //=============================================================================
 void CCpu::SelectJudge()
 {
+    CPlayer* pPlayer = CManager::GetInstance()->GetGame()->GetPlayer();
+
     if (!m_bJudge)
     {
-        CPlayer* pPlayer = CManager::GetInstance()->GetGame()->GetPlayer();
         if (pPlayer)
         {
+            // コンボ終了
             pPlayer->EndCombo();
         }
     }
+
     m_nCounter = 0;
 
     HAND_TYPE nHand = (HAND_TYPE)CLibrary::Random(0, 2);    // 出し手
-    m_Correct = (CORRECT_TYPE)CLibrary::Random(0, 0);       // 正解の手
+    m_Correct = (CORRECT_TYPE)CLibrary::Random(0, 2);       // 正解の手
     CScene2D* pScene2D = CScene2D::Create(POS, SIZE);
     CTexture* pTexture = GET_TEXTURE_PTR;
+    CJudgeFlip* pFlip = CManager::GetInstance()->GetGame()->GetFlip();
+    if (pFlip)
+    {
+        switch (m_Correct)
+        {
+        case CORRECT_TYPE_WIN:
+            pFlip->SetFlip((CJudgeFlip::JUDGE_FLIP_STATE)CORRECT_TYPE_WIN);
+            break;
+        case CORRECT_TYPE_DRAW:
+            pFlip->SetFlip((CJudgeFlip::JUDGE_FLIP_STATE)CORRECT_TYPE_DRAW);
+            break;
+        case CORRECT_TYPE_LOSE:
+            pFlip->SetFlip((CJudgeFlip::JUDGE_FLIP_STATE)CORRECT_TYPE_LOSE);
+            break;
+        }
+    }
     switch (nHand)
     {
         // グー
@@ -142,9 +166,54 @@ void CCpu::SelectJudge()
     default:
         break;
     }
+    SubInter(pPlayer);
 
     BindScene2D(pScene2D);
     SetHand(nHand);
 
     m_bJudge = false;
+}
+
+//=============================================================================
+// 間隔の減算
+//=============================================================================
+void CCpu::SubInter(CPlayer* &pPlayer)
+{
+    switch (pPlayer->GetCombo())
+    {
+    case 5:
+        m_nInterval -= 10;
+        break;
+    case 10:
+        m_nInterval -= 15;
+        break;
+    case 15:
+        m_nInterval -= 15;
+        break;
+    case 20:
+        m_nInterval -= 15;
+        break;
+    case 25:
+        m_nInterval -= 15;
+        break;
+    case 30:
+        m_nInterval -= 15;
+        break;
+    case 45:
+        m_nInterval -= 15;
+        break;
+    case 60:
+        m_nInterval -= 15;
+        break;
+    case 75:
+        m_nInterval -= 15;
+        break;
+    case 90:
+        m_nInterval -= 15;
+        break;
+
+    default:
+        break;
+    }
+
 }

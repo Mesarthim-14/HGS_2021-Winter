@@ -114,6 +114,19 @@ void CGame::Update()
         CConfettiFactory::Create(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f),20);
         CConfettiFactory::Create(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f),20);
     }
+    if (pKey->GetTrigger(DIK_B))
+    {
+        CRenderer* pRenderer = CManager::GetInstance()->GetRenderer();
+        if (pRenderer->GetShockBlur())
+        {
+            pRenderer->SetShockBlur(false, 0.0f);
+        }
+        else
+        {
+            pRenderer->SetShockBlur(true, 10.0f);
+        }
+    }
+
     if (pKey->GetTrigger(DIK_LEFT))
     {
         m_pFlip->SetFlip(CJudgeFlip::STATE_WIN);

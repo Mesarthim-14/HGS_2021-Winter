@@ -66,8 +66,6 @@ HRESULT CJudgeFlip::Init()
     SetSceneInfo(POS, SIZE);
     CScene2D::Init();
 
-    BindTexture(GET_TEXTURE_PTR->GetTexture(WIN_TEX_NUM));
-
     return S_OK;
 }
 
@@ -92,7 +90,10 @@ void CJudgeFlip::Update()
 //=============================================================================
 void CJudgeFlip::Draw()
 {
-    CScene2D::Draw();
+    if (GetTexture())
+    {
+        CScene2D::Draw();
+    }
 }
 
 void CJudgeFlip::SetFlip(JUDGE_FLIP_STATE state)
@@ -100,10 +101,14 @@ void CJudgeFlip::SetFlip(JUDGE_FLIP_STATE state)
     switch (state)
     {
     case CJudgeFlip::STATE_WIN:
-        BindTexture(GET_TEXTURE_PTR->GetTexture(WIN_TEX_NUM));
+        BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_WIN));
         break;
+    case CJudgeFlip::STATE_DRAW:
+        BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_DRAW));
+        break;
+
     case CJudgeFlip::STATE_LOSE:
-        BindTexture(GET_TEXTURE_PTR->GetTexture(LOSE_TEX_NUM));
+        BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_LOSE));
         break;
 
     default:

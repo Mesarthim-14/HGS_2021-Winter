@@ -43,6 +43,9 @@ public:
         TEXTURE_NUM_NUMBER,     // 数字
         TEXTURE_NUM_AUDIENCE1,  // 観客テクスチャ1
         TEXTURE_NUM_AUDIENCE2,  // 観客テクスチャ2
+        TEXTURE_NUM_WIN,        // 勝ち
+        TEXTURE_NUM_DRAW,       // 引き分け
+        TEXTURE_NUM_LOSE,       // 負け
         TEXTURE_NUM_GIRLE,      // 女の子
         TEXTURE_NUM_MAX
     };

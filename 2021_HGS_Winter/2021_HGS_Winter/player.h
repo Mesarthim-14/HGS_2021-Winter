@@ -33,6 +33,9 @@ public:
     void Update();  // 更新処理
     void EndCombo();    // コンボ終了
 
+    // Get関数
+    int GetCombo()const { return m_nCombo; }
+
 private:
     void SelectHand();  // 手を選ぶ
     void Judge();       // 判定

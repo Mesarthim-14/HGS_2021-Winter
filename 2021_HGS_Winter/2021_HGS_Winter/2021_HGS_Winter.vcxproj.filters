@@ -61,6 +61,9 @@
     <Filter Include="11_judge">
       <UniqueIdentifier>{4dba2e6f-2b12-4a77-b64a-8d6de8ef3e49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="06_Effect\confetti">
+      <UniqueIdentifier>{a42f8be2-a805-47c5-ad0f-2e619836cc95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="camera.cpp">
@@ -210,12 +213,6 @@
     <ClCompile Include="number_2d.cpp">
       <Filter>09_Ui</Filter>
     </ClCompile>
-    <ClCompile Include="confetti.cpp">
-      <Filter>08_Object</Filter>
-    </ClCompile>
-    <ClCompile Include="confetti_factory.cpp">
-      <Filter>08_Object</Filter>
-    </ClCompile>
     <ClCompile Include="girle.cpp">
       <Filter>08_Object</Filter>
     </ClCompile>
@@ -224,6 +221,12 @@
     </ClCompile>
     <ClCompile Include="judge_flip.cpp">
       <Filter>08_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="confetti.cpp">
+      <Filter>06_Effect\confetti</Filter>
+    </ClCompile>
+    <ClCompile Include="confetti_factory.cpp">
+      <Filter>06_Effect\confetti</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -374,12 +377,6 @@
     <ClInclude Include="number_2d.h">
       <Filter>09_Ui</Filter>
     </ClInclude>
-    <ClInclude Include="confetti.h">
-      <Filter>08_Object</Filter>
-    </ClInclude>
-    <ClInclude Include="confetti_factory.h">
-      <Filter>08_Object</Filter>
-    </ClInclude>
     <ClInclude Include="girle.h">
       <Filter>08_Object</Filter>
     </ClInclude>
@@ -388,6 +385,12 @@
     </ClInclude>
     <ClInclude Include="judge_flip.h">
       <Filter>08_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="confetti.h">
+      <Filter>06_Effect\confetti</Filter>
+    </ClInclude>
+    <ClInclude Include="confetti_factory.h">
+      <Filter>06_Effect\confetti</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

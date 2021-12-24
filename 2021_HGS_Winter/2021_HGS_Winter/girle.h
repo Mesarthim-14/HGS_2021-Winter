@@ -22,8 +22,6 @@
 class CGirle : public CScene2D
 {
 public:
-  
-
     CGirle(PRIORITY = PRIORITY_CHARACTER); // コンストラクタ
     ~CGirle();                     // デストラクタ
 
@@ -33,7 +31,8 @@ public:
     void Update();             // 更新処理
     void Draw();
 private:
-
+    int m_nTexNum;
+    int m_nCntRhythm;
 };
 
 #endif

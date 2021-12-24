@@ -73,6 +73,8 @@ HRESULT CTexture::SetTextureName()
         { "data/Texture/number_1.png" },           // パー
         { "data/Texture/kankyaku.png" },                // 観客1
         { "data/Texture/kankyaku2.png" },               // 観客2
+        { "data/Texture/Girl_Character.png" },               // 観客2
+        
     };
 
     // 分割テクスチャ

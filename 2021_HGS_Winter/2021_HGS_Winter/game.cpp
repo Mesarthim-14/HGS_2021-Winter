@@ -67,6 +67,8 @@ HRESULT CGame::Init()
 
     m_pFlip = CJudgeFlip::Create();
 
+    CGirle::Create();
+
     return S_OK;
 }
 

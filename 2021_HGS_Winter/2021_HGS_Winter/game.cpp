@@ -105,6 +105,12 @@ void CGame::Update()
         pFade->SetFade(CManager::MODE_TYPE_TITLE);
     }
 
+    if (pKey->GetTrigger(DIK_RETURN) && mode == CFade::FADE_MODE_NONE)
+    {
+        CFade *pFade = CManager::GetInstance()->GetFade();
+        pFade->SetFade(CManager::MODE_TYPE_RESULT);
+    }
+
     //  Ž†áo‚·
     if (pKey->GetTrigger(DIK_Z))
     {

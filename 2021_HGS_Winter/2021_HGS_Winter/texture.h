@@ -43,6 +43,10 @@ public:
         TEXTURE_NUM_NUMBER,     // 数字
         TEXTURE_NUM_AUDIENCE1,  // 観客テクスチャ1
         TEXTURE_NUM_AUDIENCE2,  // 観客テクスチャ2
+        TEXTURE_NUM_TITLE,      // タイトル
+        TEXTURE_NUM_TUTORIAL,   // チュートリアル
+        TEXTURE_NUM_GAME,       // ゲーム
+        TEXTURE_NUM_RESULT,     // リザルト
         TEXTURE_NUM_MAX
     };
 

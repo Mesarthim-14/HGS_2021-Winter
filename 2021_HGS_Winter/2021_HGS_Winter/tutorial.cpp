@@ -57,8 +57,7 @@ void CTutorial::Uninit()
 {
     if (CManager::GetInstance()->CManager::GetResourceManager())
     {
-        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
-        pSound->Stop(CSound::SOUND_BGM_TITLE);
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Stop(CSound::SOUND_BGM_TITLE);
     }
 
     for (auto &object : m_pObject2D)
@@ -84,6 +83,10 @@ void CTutorial::Update()
     if (CManager::GetInstance()->GetJoypad()->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_START, 0) && mode == CFade::FADE_MODE_NONE
         || pKey->GetTrigger(DIK_RETURN) && mode == CFade::FADE_MODE_NONE)
     {
+        // ƒTƒEƒ“ƒh‚ÌÄ¶
+        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
+        pSound->Play(CSound::SOUND_SE_DON);
+
         CFade *pFade = CManager::GetInstance()->GetFade();
         pFade->SetFade(CManager::MODE_TYPE_GAME);
     }

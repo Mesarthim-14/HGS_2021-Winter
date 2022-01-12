@@ -13,6 +13,7 @@
 #include "manager.h"
 #include "texture.h"
 #include "resource_manager.h"
+#include "sound.h"
 
 //**********************************
 // ƒ}ƒNƒ’è‹`

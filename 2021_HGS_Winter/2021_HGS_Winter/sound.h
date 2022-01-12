@@ -33,6 +33,14 @@ public:
         SOUND_SE_HAPPY,
         SOUND_SE_OUT,
         SOUND_SE_SAFE,
+        SOUND_SE_MOUHITOIKI,
+        SOUND_SE_GOOD,
+        SOUND_SE_EXCELLENT,
+        SOUND_SE_MARVELOUS,
+        SOUND_SE_START,
+        SOUND_SE_GAYA,
+        SOUND_SE_HANAFUBUKI,
+        SOUND_SE_PON,
         SOUND_LABEL_MAX,
     };
 

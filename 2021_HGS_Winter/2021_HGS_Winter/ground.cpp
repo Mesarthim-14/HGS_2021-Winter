@@ -64,7 +64,7 @@ HRESULT CGround::Init()
     SetInfo(SIZE, GROUND_VERTEX_NUM);
     CMeshField::Init();
     CTexture *pTexture = GET_TEXTURE_PTR;
-    BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_TEST));
+    //BindTexture(pTexture->GetTexture(CTexture::TEXTURE_NUM_TEST));
 
     return S_OK;
 }

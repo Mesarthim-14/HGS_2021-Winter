@@ -26,6 +26,14 @@ CSound::PARAM CSound::m_aParam[SOUND_LABEL_MAX] =
     { "data/Sound/SE/happy.wav",SOUND_LOOP_OFF },
     { "data/Sound/SE/out.wav",SOUND_LOOP_OFF },
     { "data/Sound/SE/safe.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/mouhitoiki.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/good.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/excellent.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/Marvelous.wav",SOUND_LOOP_OFF },
+    { "data/Sound/SE/start.wav", SOUND_LOOP_OFF },
+    { "data/Sound/SE/gaya.wav", SOUND_LOOP_ON },
+    { "data/Sound/SE/hanafubuki.wav", SOUND_LOOP_OFF },
+    { "data/Sound/SE/pon.wav", SOUND_LOOP_OFF },
 };
 
 //================================================
@@ -187,7 +195,7 @@ HRESULT CSound::Init()
         m_apSourceVoice[nCntSound]->SubmitSourceBuffer(&buffer);
 
         // オーディオバッファの登録
-        m_apSourceVoice[nCntSound]->SetVolume(0.2f);
+        m_apSourceVoice[nCntSound]->SetVolume(1.0f);
         //m_apSourceVoice[nCntSound]->SetVolume(0.01f);
 
         // ファイルをクローズ

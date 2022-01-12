@@ -62,7 +62,6 @@ HRESULT CTexture::SetTextureName()
     // 通常テクスチャ
     m_aTexFileName[TEXTURE_TYPE_NUM_NORMAL] =
     {
-        { "data/Texture/stage_1.png" },         // テスト
         { "data/Texture/CPU_Rock2.png" },        // グー
         { "data/Texture/CPU_Scissors2.png" },    // チョキ
         { "data/Texture/CPU_Paper2.png" },       // パー

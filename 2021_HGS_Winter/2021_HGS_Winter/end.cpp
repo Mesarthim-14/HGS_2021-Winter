@@ -12,6 +12,7 @@
 #include "texture.h"
 #include "manager.h"
 #include "resource_manager.h"
+#include "sound.h"
 
 //**********************************
 // ƒ}ƒNƒ’è‹`
@@ -64,6 +65,9 @@ HRESULT CEnd::Init(void)
 
     BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_END));
     m_nCntRhythm = 0;
+
+    CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_DONDON);
+
     return S_OK;
 }
 

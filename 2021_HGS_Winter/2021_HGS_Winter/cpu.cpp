@@ -149,16 +149,21 @@ void CCpu::SelectJudge()
         {
         case CORRECT_TYPE_WIN:
             pFlip->SetFlip((CJudgeFlip::JUDGE_FLIP_STATE)CORRECT_TYPE_WIN);
+            CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_SAFE);
             break;
         case CORRECT_TYPE_DRAW:
             pFlip->SetFlip((CJudgeFlip::JUDGE_FLIP_STATE)CORRECT_TYPE_DRAW);
+            CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_DRAW);
             break;
         case CORRECT_TYPE_LOSE:
             pFlip->SetFlip((CJudgeFlip::JUDGE_FLIP_STATE)CORRECT_TYPE_LOSE);
+            CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_OUT);
             break;
         default:
             break;
         }
+
+        SubInter(pPlayer);
         CGauge::Create(m_nInterval);
         CManager::GetInstance()->GetGame()->GetGirle()->SetAnim(CGirle::STATE_UP);
     }
@@ -177,7 +182,6 @@ void CCpu::SelectJudge()
     default:
         break;
     }
-    SubInter(pPlayer);
 
     BindScene2D(pScene2D);
     SetHand(nHand);

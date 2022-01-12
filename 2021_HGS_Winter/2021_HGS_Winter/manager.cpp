@@ -321,11 +321,11 @@ void CManager::SetMode(const MODE_TYPE &mode)
         m_pModeBase = nullptr;
     }
 
-    // サウンドの情報
-    CSound *pSound = CManager::GetResourceManager()->GetSoundClass();
+    //// サウンドの情報
+    //CSound *pSound = CManager::GetResourceManager()->GetSoundClass();
 
-    //サウンドストップ
-    pSound->StopAll();
+    ////サウンドストップ
+    //pSound->StopAll();
 
     // シーン情報のリリース
     CScene::ReleaseAll();

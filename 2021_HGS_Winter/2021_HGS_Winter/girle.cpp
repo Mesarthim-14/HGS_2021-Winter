@@ -12,6 +12,7 @@
 #include "texture.h"
 #include "manager.h"
 #include "resource_manager.h"
+#include "sound.h"
 
 //**********************************
 // ƒ}ƒNƒ’è‹`
@@ -65,6 +66,8 @@ HRESULT CGirle::Init(void)
     BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_GIRLE));
     m_nCntRhythm = 0;
     m_nTexNum = STATE_DOWN;
+
+    CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_START);
 
     return S_OK;
 }

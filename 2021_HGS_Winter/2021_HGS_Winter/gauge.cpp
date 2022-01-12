@@ -17,6 +17,7 @@
 #include "judge_flip.h"
 #include "player.h"
 #include "scene2d.h"
+#include "sound.h"
 
 //=============================================================================
 // ƒ}ƒNƒ’è‹`
@@ -93,6 +94,12 @@ void CGauge::Update()
         CScene2D::Update();
 
         m_nCntFrame++;
+
+        if (m_nCntFrame == 1 || m_nCntFrame == (m_nMaxFrame / 4) * 1 ||
+            m_nCntFrame == (m_nMaxFrame / 4) * 2 || m_nCntFrame == (m_nMaxFrame / 4) * 3)
+        {
+            CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_CLAP);
+        }
 
         if (m_nCntFrame >= m_nMaxFrame)
         {

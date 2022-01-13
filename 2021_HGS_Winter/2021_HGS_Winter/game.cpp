@@ -118,6 +118,7 @@ void CGame::Uninit()
         m_pGirle->Uninit();
         m_pGirle = nullptr;
     }
+
     if (m_pAudience)
     {
         m_pAudience->Uninit();

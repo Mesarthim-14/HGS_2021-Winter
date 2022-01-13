@@ -203,9 +203,6 @@ void CCpu::SubInter(CPlayer* &pPlayer)
     case 15:
         m_nInterval -= 15;
         break;
-    case 25:
-        m_nInterval -= 15;
-        break;
     case 35:
         m_nInterval -= 15;
         break;
@@ -222,6 +219,9 @@ void CCpu::SubInter(CPlayer* &pPlayer)
         m_nInterval -= 15;
         break;
     case 100:
+        m_nInterval -= 15;
+        break;
+    case 120:
         m_nInterval -= 15;
         break;
 

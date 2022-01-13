@@ -73,7 +73,7 @@ HRESULT CResult::Init()
     for (int nCount = 0; nCount < nComboDigit; nCount++)
     {
         // スコアの生成
-        CNumber2d *pNumber2d = CNumber2d::Create(D3DXVECTOR3(400.0f - nCount * 80.0f, 360.0f, 0.0f), D3DXVECTOR3(105.0f, 105.0f, 0.0f));	// 座標、サイズ
+        CNumber2d *pNumber2d = CNumber2d::Create(D3DXVECTOR3(740.0f - nCount * 200.0f, 380.0f, 0.0f), D3DXVECTOR3(255.0f, 255.0f, 0.0f));	// 座標、サイズ
 
         // !nullcheck
         if (pNumber2d)

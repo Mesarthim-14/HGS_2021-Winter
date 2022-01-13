@@ -75,7 +75,7 @@ HRESULT CGirle::Init(void)
 void CGirle::Uninit(void)
 {
     // ŠJ•úˆ—
-    Release();
+    CScene2D::Uninit();
 }
 
 //=============================

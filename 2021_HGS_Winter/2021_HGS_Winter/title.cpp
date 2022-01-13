@@ -44,8 +44,8 @@ HRESULT CTitle::Init()
 {
     if (CManager::GetInstance()->CManager::GetResourceManager())
     {
-        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
-        pSound->Stop(CSound::SOUND_BGM_TITLE);
+        // サウンドの生成
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_BGM_TITLE);
     }
 
     // タイトルテクスチャの生成
@@ -84,8 +84,8 @@ void CTitle::Update()
     if (CManager::GetInstance()->GetJoypad()->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_START, 0) && mode == CFade::FADE_MODE_NONE
         || pKey->GetTrigger(DIK_RETURN) && mode == CFade::FADE_MODE_NONE)
     {
-        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
-        pSound->Play(CSound::SOUND_SE_DON);
+        // サウンドの再生
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_DON);
 
         CFade *pFade = CManager::GetInstance()->GetFade();
         pFade->SetFade(CManager::MODE_TYPE_TUTORIAL);

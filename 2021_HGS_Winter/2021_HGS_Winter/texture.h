@@ -33,7 +33,6 @@ public:
     enum TEXTURE_TYPE
     {
         TEXTURE_NUM_NONE = -1,  // 初期値 使うとき-1にしてください
-        TEXTURE_NUM_TEST,       // テストテクスチャ
         TEXTURE_NUM_CPU_GU,     // グー
         TEXTURE_NUM_CPU_CHOKI,  // チョキ
         TEXTURE_NUM_CPU_PA,     // パー

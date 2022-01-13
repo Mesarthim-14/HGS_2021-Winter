@@ -62,7 +62,6 @@ HRESULT CTexture::SetTextureName()
     // 通常テクスチャ
     m_aTexFileName[TEXTURE_TYPE_NUM_NORMAL] =
     {
-        { "data/Texture/stage_1.png" },         // テスト
         { "data/Texture/CPU_Rock2.png" },        // グー
         { "data/Texture/CPU_Scissors2.png" },    // チョキ
         { "data/Texture/CPU_Paper2.png" },       // パー
@@ -78,7 +77,7 @@ HRESULT CTexture::SetTextureName()
         { "data/Texture/Girl_Character.png" },  // 女の子
         { "data/Texture/PresentBox.png" },      // プレゼントボックス
         { "data/Texture/Title.png" },           // タイトル
-        { "data/Texture/stage_1.png" },         // チュートリアル
+        { "data/Texture/Tutorial.png" },         // チュートリアル
         { "data/Texture/game_bg.png" },         // ゲーム
         { "data/Texture/Ranking.png" },           // リザルト
         { "data/Texture/end.png" },           // リザルト

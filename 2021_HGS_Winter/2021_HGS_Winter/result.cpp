@@ -45,13 +45,7 @@ CResult::~CResult()
 //=============================================================================
 HRESULT CResult::Init()
 {
-    if (CManager::GetInstance()->CManager::GetResourceManager())
-    {
-        CSound* pSound = CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass();
-        pSound->Stop(CSound::SOUND_SE_BYE);
-    }
-
-    // タイトルテクスチャの生成
+    // リザルトテクスチャの生成
     CScene2D* pScene2D = CScene2D::Create(HALF_SCREEN_POS, SCREEN_SIZE);
     pScene2D->BindTexture(GET_TEXTURE_PTR->GetTexture(CTexture::TEXTURE_NUM_RESULT));
     m_pObject2D.push_back(pScene2D);
@@ -61,11 +55,11 @@ HRESULT CResult::Init()
     int nConboNum = CManager::GetInstance()->GetResultScore();
 
     // 桁数を求める
-    while (nConboNum != 0)
+    do
     {
         nConboNum /= 10;
         nComboDigit++;
-    }
+    } while (nConboNum != 0);
 
     int nScore = CManager::GetInstance()->GetResultScore();
 
@@ -95,6 +89,23 @@ HRESULT CResult::Init()
                 pNumber2d->SetNumber(nScore / (nCount * 10));
             }
         }
+    }
+
+    if (nScore < 10)
+    {
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_MOUHITOIKI);
+    }
+    else if (nScore >= 10 && nScore < 20)
+    {
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_GOOD);
+    }
+    else if (nScore >= 20 && nScore < 30)
+    {
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_EXCELLENT);
+    }
+    else if (nScore >= 30)
+    {
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_MARVELOUS);
     }
 
     return S_OK;
@@ -128,6 +139,8 @@ void CResult::Update()
     if (CManager::GetInstance()->GetJoypad()->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_START, 0) && mode == CFade::FADE_MODE_NONE
         || pKey->GetTrigger(DIK_RETURN) && mode == CFade::FADE_MODE_NONE)
     {
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_BYE);
+
         CFade *pFade = CManager::GetInstance()->GetFade();
         pFade->SetFade(CManager::MODE_TYPE_TITLE);
     }

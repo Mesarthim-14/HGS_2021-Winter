@@ -156,7 +156,7 @@ void CPlayer::SelectHand()
     
     CInputJoypad* pPad = CManager::GetInstance()->GetJoypad();
     // グー
-    if (CLibrary::KeyboardTrigger(DIK_1) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_X, 0))
+    if (CLibrary::KeyboardTrigger(DIK_1) || CLibrary::KeyboardTrigger(DIK_NUMPAD5) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_X, 0))
     {
         CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
         CTexture* pTexture = GET_TEXTURE_PTR;
@@ -182,7 +182,7 @@ void CPlayer::SelectHand()
         }
     }
 
-    else if (CLibrary::KeyboardTrigger(DIK_2) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_Y, 0) )
+    else if (CLibrary::KeyboardTrigger(DIK_2) || CLibrary::KeyboardTrigger(DIK_NUMPAD1) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_Y, 0) )
     {
         CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
         CTexture* pTexture = GET_TEXTURE_PTR;
@@ -207,7 +207,7 @@ void CPlayer::SelectHand()
             break;
         }
     }
-    else if (CLibrary::KeyboardTrigger(DIK_3) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_B, 0))
+    else if (CLibrary::KeyboardTrigger(DIK_3) || CLibrary::KeyboardTrigger(DIK_NUMPAD3) || pPad->GetJoystickTrigger(CInputJoypad::JOY_BUTTON_B, 0))
     {
         CScene2D* pScene2D = CScene2D::Create(TEX_POS, TEX_SIZE);
         CTexture* pTexture = GET_TEXTURE_PTR;
@@ -396,21 +396,30 @@ void CPlayer::EndCombo()
 //=============================================================================
 void CPlayer::CreateEffect()
 {
+    if (m_nCombo < 20)
+    {
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_PON);
+    }
+
     if (m_nCombo == 10)
     {
         CAudience* pAudience = CManager::GetInstance()->GetGame()->GetAudience();
         pAudience->SetDrawFlag();
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_GAYA);
     }
 
     if (m_nCombo >= 20)
     {
         CRenderer* pRenderer = CManager::GetInstance()->GetRenderer();
         pRenderer->SetShockBlur(true, 20.0f);
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_DON);
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_HAPPY);
     }
     if (m_nCombo >= 30)
     {
         CConfettiFactory::Create(D3DXCOLOR(0.0f, 1.0f, 0.0f, 1.0f), 20);
         CConfettiFactory::Create(D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f), 20);
+        CManager::GetInstance()->CManager::GetResourceManager()->GetSoundClass()->Play(CSound::SOUND_SE_HANAFUBUKI);
     }
     if (m_nCombo >= 40)
     {
